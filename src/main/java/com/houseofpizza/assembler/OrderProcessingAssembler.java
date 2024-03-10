@@ -1,11 +1,12 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.bin.OrderProcessingBin;
-import com.houseofpizza.resource.OrderProcessingModel;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.houseofpizza.bin.OrderProcessingBin;
+import com.houseofpizza.resource.OrderProcessingModel;
 
 @Component
 public class OrderProcessingAssembler {

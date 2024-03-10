@@ -1,23 +1,22 @@
 package com.houseofpizza.jpa.specification;
 
-import com.houseofpizza.entity.PizzaToOrderEntity;
-import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
-import static com.houseofpizza.entity.PizzaToOrderEntity.ID_STATUS_FIELD;
-import static com.houseofpizza.entity.PizzaToOrderEntity.NUMBER_ORDER_FIELD;
+import com.houseofpizza.entity.PizzaToOrder;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PizzaToOrderSpecification {
 
-    public Specification<PizzaToOrderEntity> withIdOrderEqualTo(final Integer orderNumber) {
+    public Specification<PizzaToOrder> withIdOrderEqualTo(final Integer orderNumber) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(NUMBER_ORDER_FIELD), orderNumber));
+            .equal(root.get(PizzaToOrder.Fields.idOrder), orderNumber));
     }
 
-    public Specification<PizzaToOrderEntity> withIdStatusEqualTo(final Integer idStatus) {
+    public Specification<PizzaToOrder> withIdStatusEqualTo(final Integer idStatus) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(ID_STATUS_FIELD), idStatus));
+            .equal(root.get(PizzaToOrder.Fields.idStatus), idStatus));
     }
 
 }

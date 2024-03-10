@@ -1,8 +1,8 @@
 package com.houseofpizza.resource;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 @Data
 public class OrderProcessingModel {

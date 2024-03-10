@@ -1,13 +1,14 @@
 package com.houseofpizza.bin;
 
-import com.houseofpizza.entity.PizzaEntity;
+import java.io.Serializable;
+import java.util.Map;
+
+import com.houseofpizza.entity.Pizza;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +20,6 @@ public class StatusOrderBin implements Serializable {
     private Integer orderNumber;
 
     // Output
-    private Map<PizzaEntity, String> pizzaMap;
+    private Map<Pizza, String> pizzaMap;
 
 }

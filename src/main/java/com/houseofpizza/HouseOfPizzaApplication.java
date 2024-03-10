@@ -2,10 +2,10 @@ package com.houseofpizza;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+// TODO : Fix with correct dependency swagger
 @SpringBootApplication
-@EnableSwagger2
+//@EnableSwagger2
 public class HouseOfPizzaApplication {
 
     public static void main(String[] args) {

@@ -1,7 +1,8 @@
 package com.houseofpizza.error;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
+
+import lombok.Getter;
 
 @Getter
 public enum ErrorCodes {
@@ -9,8 +10,10 @@ public enum ErrorCodes {
     ERROR01("Errore: Elenco vuoto"),
     ERROR02("Errore: Pizza non trovata"),
     ERROR03("Errore: Ordine non presente"),
+    STATUS_NOT_FOUND("Error: Status of pizza not found"),
     ERROR04("Errore: Nessuna pizza da produrre individuata");
-    private String message;
+
+    private final String message;
 
     ErrorCodes(String message) {
         this.message = message;
