@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "T_PIZZA")
+@Table(name = "pizza")
 @Getter
 @Setter
 @NoArgsConstructor

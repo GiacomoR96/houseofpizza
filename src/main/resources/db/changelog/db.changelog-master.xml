@@ -6,4 +6,6 @@
 
     <!--  initialize the database with table -->
     <include file="/db/changelog/DDL/1710028327105-changelog.yaml"/>
+    <include file="/db/changelog/DDL/1710069229856-changelog.yaml"/>
+    <include file="/db/changelog/DML/populate_pizza_table.yaml" />
 </databaseChangeLog>

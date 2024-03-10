@@ -17,6 +17,9 @@ import com.houseofpizza.factory.StatusOrderBinFactory;
 import com.houseofpizza.resource.StatusOrderModel;
 import com.houseofpizza.service.StatusOrderService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping(path = "/")
 public class StatusOrderController {
@@ -29,12 +32,11 @@ public class StatusOrderController {
 
 
     @GetMapping(value = {"/pizza/statusMyOrder/{orderNumber}"}, produces = {APPLICATION_JSON_VALUE})
-    // TODO : Fix with correct dependency swagger
-//    @ApiOperation(value = "Api utile per controllare lo stato dell'ordine")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = HTTP_OK, message = "OK"),
-//            @ApiResponse(code = HTTP_NOT_FOUND, message = "NOT FOUND")
-//    })
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<StatusOrderModel> getStatusMyOrder(
         @RequestParam(name = "orderNumber", required = true) final Integer orderNumber
     ) throws ErrorException {

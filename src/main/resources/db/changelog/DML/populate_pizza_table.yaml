@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Giacomo
+      changes:
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: 'Margherita'
+              - column:
+                  name: price
+                  value: 5.5
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: 'Capricciosa'
+              - column:
+                  name: price
+                  value: 7.0
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: 'Salsiccia&Friarielli'
+              - column:
+                  name: price
+                  value: 8

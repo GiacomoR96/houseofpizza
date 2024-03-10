@@ -19,6 +19,9 @@ import com.houseofpizza.resource.OrderingModel;
 import com.houseofpizza.resource.dto.CreatePizzaOrderingDto;
 import com.houseofpizza.service.OrderingService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping(path = "/")
 public class OrderingController {
@@ -30,12 +33,10 @@ public class OrderingController {
     private OrderingAssembler assembler;
 
     @PostMapping(value = {"/pizza/ordering"}, produces = {APPLICATION_JSON_VALUE})
-    // TODO : Fix with correct dependency swagger
-//    @ApiOperation(value = "Api utile per aggiungere un ordine")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = HTTP_OK, message = "OK"),
-//            @ApiResponse(code = HTTP_NOT_FOUND, message = "NOT FOUND")
-//    })
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<OrderingModel> postOrdering(
         @RequestBody CreatePizzaOrderingDto dto,
         @RequestParam(name = "personName", defaultValue = "CLIENTE", required = true) final String personName,

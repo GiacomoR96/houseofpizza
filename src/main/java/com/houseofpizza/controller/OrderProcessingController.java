@@ -15,6 +15,9 @@ import com.houseofpizza.error.ErrorException;
 import com.houseofpizza.resource.OrderProcessingModel;
 import com.houseofpizza.service.OrderProcessingService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping(path = "/")
 public class OrderProcessingController {
@@ -26,11 +29,10 @@ public class OrderProcessingController {
     private OrderProcessingAssembler assembler;
 
     @GetMapping(value = {"/pizza/orderProcessing"}, produces = {APPLICATION_JSON_VALUE})
-//    @ApiOperation(value = "Api per avviare la produzione di pizze, una per volta")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = HTTP_OK, message = "OK"),
-//            @ApiResponse(code = HTTP_NOT_FOUND, message = "NOT FOUND")
-//    })
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<OrderProcessingModel> getOrderProcessing() throws ErrorException, InterruptedException {
         OrderProcessingBin output = service.getOrderProcessing();
         return ok(assembler.populateModel(output));
