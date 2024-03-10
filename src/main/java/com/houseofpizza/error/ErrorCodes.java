@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 public enum ErrorCodes {
 
-    ERROR01("Errore: Elenco vuoto"),
-    ERROR02("Errore: Pizza non trovata"),
-    ERROR03("Errore: Ordine non presente"),
+    LIST_NOT_FOUND("Error: Empty list"),
+    PIZZA_NOT_FOUND("Error: Pizza not found"),
+    ORDER_NOT_FOUND("Error: Order not found"),
     STATUS_NOT_FOUND("Error: Status of pizza not found"),
-    ERROR04("Errore: Nessuna pizza da produrre individuata");
+    ELEMENTS_TO_ELABORATE_NOT_FOUND("Error: No pizza to produce identified");
 
     private final String message;
 

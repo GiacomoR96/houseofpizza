@@ -62,12 +62,12 @@ public class StatusOrderServiceImpl implements StatusOrderService {
         Specification<PizzaToOrder> pizzaToOrderSpecification =
             PizzaToOrderSpecificationBuilder.withIdOrderEqualTo(orderNumber);
         return checkNotEmptyListOrThrowNotFound(pizzaToOrderRepository.findAll(pizzaToOrderSpecification),
-            ErrorCodes.ERROR03);
+            ErrorCodes.ORDER_NOT_FOUND);
     }
 
     private Pizza retrievePizzaByPizzaId(Integer pizzaId) {
         Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withPizzaIdEqualTo(pizzaId);
-        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.ERROR02);
+        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.PIZZA_NOT_FOUND);
     }
 
     private Status retrieveStatusByStatusId(Integer statusId) {

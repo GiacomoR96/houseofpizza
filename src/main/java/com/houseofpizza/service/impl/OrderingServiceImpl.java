@@ -52,7 +52,7 @@ public class OrderingServiceImpl implements OrderingService {
         log.info("Begin service method postOrderingService");
         List<OrderingDto> orderingDtoList = bin.getDto().getOrderingDtoList();
 
-        checkNotEmptyListOrThrowNotFound(orderingDtoList, ErrorCodes.ERROR01);
+        checkNotEmptyListOrThrowNotFound(orderingDtoList, ErrorCodes.LIST_NOT_FOUND);
         Order order = retrieveOrderByPersonNameAndEmail(bin.getPersonName(), bin.getEmail());
 
         for (OrderingDto orderingDto : orderingDtoList) {
@@ -90,7 +90,7 @@ public class OrderingServiceImpl implements OrderingService {
 
     private Pizza retrievePizzaByName(String name) {
         Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withNameEqualTo(name);
-        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.ERROR02);
+        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.PIZZA_NOT_FOUND);
     }
 
     private Status prepareStatusEntityForSave() {

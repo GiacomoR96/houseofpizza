@@ -65,14 +65,14 @@ public class OrderProcessingServiceImpl implements OrderProcessingService {
 
     private List<Status> retrieveStatusByStatus(String status) {
         Specification<Status> statusSpecification = StatusSpecification.withStatusEqualTo(status);
-        return checkNotEmptyListOrThrowNotFound(statusRepository.findAll(statusSpecification), ErrorCodes.ERROR04);
+        return checkNotEmptyListOrThrowNotFound(statusRepository.findAll(statusSpecification), ErrorCodes.ELEMENTS_TO_ELABORATE_NOT_FOUND);
     }
 
     private PizzaToOrder retrievePizzaToOrderByIdStatus(Integer idStatus) {
         Specification<PizzaToOrder> pizzaToOrderSpecification =
             PizzaToOrderSpecification.withIdStatusEqualTo(idStatus);
         return extractFirstOrThrowNotFound(pizzaToOrderRepository.findAll(pizzaToOrderSpecification),
-            ErrorCodes.ERROR03);
+            ErrorCodes.ORDER_NOT_FOUND);
     }
 
 }
