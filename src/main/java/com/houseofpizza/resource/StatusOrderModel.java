@@ -1,11 +1,12 @@
 package com.houseofpizza.resource;
 
+import java.util.List;
+
 import com.houseofpizza.resource.dto.PizzaOrderingDto;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

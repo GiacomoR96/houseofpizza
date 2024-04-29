@@ -1,23 +1,22 @@
 package com.houseofpizza.jpa.specification;
 
-import com.houseofpizza.entity.OrderEntity;
-import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
-import static com.houseofpizza.entity.OrderEntity.EMAIL_FIELD;
-import static com.houseofpizza.entity.OrderEntity.PERSON_NAME_FIELD;
+import com.houseofpizza.entity.Order;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class OrderSpecification {
 
-    public Specification<OrderEntity> withPersonNameEqualTo(final String personName) {
+    public Specification<Order> withPersonNameEqualTo(final String personName) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(PERSON_NAME_FIELD), personName));
+            .equal(root.get(Order.Fields.personName), personName));
     }
 
-    public Specification<OrderEntity> withEmailEqualTo(final String email) {
+    public Specification<Order> withEmailEqualTo(final String email) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(EMAIL_FIELD), email));
+            .equal(root.get(Order.Fields.email), email));
     }
 
 }

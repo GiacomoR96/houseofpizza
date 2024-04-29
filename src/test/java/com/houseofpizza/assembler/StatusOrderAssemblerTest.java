@@ -1,7 +1,7 @@
 package com.houseofpizza.assembler;
 
 import com.houseofpizza.bin.StatusOrderBin;
-import com.houseofpizza.entity.PizzaEntity;
+import com.houseofpizza.entity.Pizza;
 import com.houseofpizza.resource.StatusOrderModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,9 +34,9 @@ class StatusOrderAssemblerTest {
                 .build();
     }
 
-    private Map<PizzaEntity, String> mockPizzaList() {
-        Map<PizzaEntity, String> map = new HashMap<>();
-        map.put(new PizzaEntity(), "1");
+    private Map<Pizza, String> mockPizzaList() {
+        Map<Pizza, String> map = new HashMap<>();
+        map.put(new Pizza(), "1");
         return map;
     }
 }

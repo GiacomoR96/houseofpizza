@@ -1,17 +1,18 @@
 package com.houseofpizza.service.impl;
 
 import com.houseofpizza.bin.OrderingBin;
-import com.houseofpizza.entity.OrderEntity;
-import com.houseofpizza.entity.PizzaEntity;
-import com.houseofpizza.entity.PizzaToOrderEntity;
-import com.houseofpizza.entity.StatusEntity;
+import com.houseofpizza.entity.Order;
+import com.houseofpizza.entity.Pizza;
+import com.houseofpizza.entity.PizzaToOrder;
+import com.houseofpizza.entity.Status;
 import com.houseofpizza.jpa.OrderRepository;
 import com.houseofpizza.jpa.PizzaRepository;
 import com.houseofpizza.jpa.PizzaToOrderRepository;
 import com.houseofpizza.jpa.StatusRepository;
 import com.houseofpizza.resource.dto.CreatePizzaOrderingDto;
 import com.houseofpizza.resource.dto.OrderingDto;
-import org.junit.Assert;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,13 +60,13 @@ class OrderingServiceImplTest {
                 .when(orderRepository)
                 .findAll(any(Specification.class));
 
-        when(statusRepository.save(any(StatusEntity.class))).thenReturn(getMockStatusEntity());
-        when(pizzaToOrderRepository.save(any(PizzaToOrderEntity.class))).thenReturn(getMockPizzaToOrderEntity());
+        when(statusRepository.save(any(Status.class))).thenReturn(getMockStatusEntity());
+        when(pizzaToOrderRepository.save(any(PizzaToOrder.class))).thenReturn(getMockPizzaToOrderEntity());
 
         OrderingBin out = service.postOrderingService(retrieveOrderingBin());
-        Assert.assertNotNull(out);
-        Assert.assertNotNull(out.getOrderNumber());
-        Assert.assertEquals(100, out.getOrderNumber().intValue());
+        Assertions.assertNotNull(out);
+        Assertions.assertNotNull(out.getOrderNumber());
+        Assertions.assertEquals(100, out.getOrderNumber().intValue());
     }
 
     private OrderingBin retrieveOrderingBin() {
@@ -88,40 +89,40 @@ class OrderingServiceImplTest {
         return Collections.singletonList(dto);
     }
 
-    private OrderEntity getMockOrderEntity() {
-        OrderEntity entity = new OrderEntity();
+    private Order getMockOrderEntity() {
+        Order entity = new Order();
         entity.setId(100);
         entity.setPersonName("");
         entity.setEmail("test@gmail.com");
         return entity;
     }
 
-    private List<OrderEntity> getMockOrderEntityList() {
+    private List<Order> getMockOrderEntityList() {
         return Collections.singletonList(getMockOrderEntity());
     }
 
-    private PizzaToOrderEntity getMockPizzaToOrderEntity() {
-        PizzaToOrderEntity entity = new PizzaToOrderEntity();
+    private PizzaToOrder getMockPizzaToOrderEntity() {
+        PizzaToOrder entity = new PizzaToOrder();
         entity.setIdOrder(1);
         entity.setIdPizza(1);
         entity.setIdStatus(1);
         return entity;
     }
 
-    private PizzaEntity getMockPizzaEntity() {
-        PizzaEntity entity = new PizzaEntity();
+    private Pizza getMockPizzaEntity() {
+        Pizza entity = new Pizza();
         entity.setId(1);
         entity.setName("Carbonara");
         entity.setPrice(6.0);
         return entity;
     }
 
-    private List<PizzaEntity> getMockPizzaEntityList() {
+    private List<Pizza> getMockPizzaEntityList() {
         return Collections.singletonList(getMockPizzaEntity());
     }
 
-    private StatusEntity getMockStatusEntity() {
-        StatusEntity entity = new StatusEntity();
+    private Status getMockStatusEntity() {
+        Status entity = new Status();
         entity.setId(1);
         entity.setStatus("In coda");
         return entity;

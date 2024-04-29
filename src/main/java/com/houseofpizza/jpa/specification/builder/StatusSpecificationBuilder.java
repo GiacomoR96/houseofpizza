@@ -1,14 +1,16 @@
 package com.houseofpizza.jpa.specification.builder;
 
-import com.houseofpizza.entity.StatusEntity;
-import com.houseofpizza.jpa.specification.StatusSpecification;
-import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.houseofpizza.entity.Status;
+import com.houseofpizza.jpa.specification.StatusSpecification;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class StatusSpecificationBuilder {
 
-    public Specification<StatusEntity> withStatusIdEqualTo(Integer statusId) {
+    public Specification<Status> withStatusIdEqualTo(Integer statusId) {
         return Specification.where(StatusSpecification.withStatusIdEqualTo(statusId));
     }
 

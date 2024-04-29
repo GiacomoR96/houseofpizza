@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 class OrderingAssemblerTest {
 
-    private OrderingAssembler assembler = new OrderingAssembler();
+    private final OrderingAssembler assembler = new OrderingAssembler();
 
     @Test
     public void populateStatusOrderModelTest() {

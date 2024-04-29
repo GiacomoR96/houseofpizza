@@ -1,20 +1,22 @@
 package com.houseofpizza.jpa.specification;
 
-import com.houseofpizza.entity.PizzaEntity;
-import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.houseofpizza.entity.Pizza;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PizzaSpecification {
 
-    public Specification<PizzaEntity> withPizzaIdEqualTo(final Integer pizzaId) {
+    public Specification<Pizza> withPizzaIdEqualTo(final Integer pizzaId) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(PizzaEntity.PIZZA_ID_FIELD), pizzaId));
+            .equal(root.get(Pizza.Fields.id), pizzaId));
     }
 
-    public Specification<PizzaEntity> withNameEqualTo(final String name) {
+    public Specification<Pizza> withNameEqualTo(final String name) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(PizzaEntity.NAME_FIELD), name));
+            .equal(root.get(Pizza.Fields.name), name));
     }
 
 }
