@@ -1,9 +1,12 @@
 package com.houseofpizza.controller;
 
-import com.houseofpizza.assembler.OrderProcessingAssembler;
-import com.houseofpizza.bin.OrderProcessingBin;
-import com.houseofpizza.resource.OrderProcessingModel;
-import com.houseofpizza.service.OrderProcessingService;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,12 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import com.houseofpizza.assembler.OrderProcessingAssembler;
+import com.houseofpizza.dto.OrderProcessingBin;
+import com.houseofpizza.representation.OrderProcessingModel;
+import com.houseofpizza.service.OrderProcessingService;
 
 @ExtendWith(MockitoExtension.class)
 class OrderProcessingControllerTest {

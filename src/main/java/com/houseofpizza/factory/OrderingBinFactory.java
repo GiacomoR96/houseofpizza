@@ -1,7 +1,7 @@
 package com.houseofpizza.factory;
 
-import com.houseofpizza.bin.OrderingBin;
-import com.houseofpizza.resource.dto.CreatePizzaOrderingDto;
+import com.houseofpizza.dto.OrderingBin;
+import com.houseofpizza.representation.dto.CreatePizzaOrderingDto;
 
 import lombok.experimental.UtilityClass;
 

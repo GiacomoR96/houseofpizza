@@ -1,7 +1,7 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.bin.OrderProcessingBin;
-import com.houseofpizza.resource.OrderProcessingModel;
+import com.houseofpizza.dto.OrderProcessingBin;
+import com.houseofpizza.representation.OrderProcessingModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

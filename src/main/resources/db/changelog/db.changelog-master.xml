@@ -4,8 +4,14 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.18.xsd">
 
-    <!--  initialize the database with table -->
+    <!-- Initialize the database with tables -->
     <include file="/db/changelog/DDL/1710028327105-changelog.yaml"/>
     <include file="/db/changelog/DDL/1710069229856-changelog.yaml"/>
-    <include file="/db/changelog/DML/populate_pizza_table.yaml" />
+
+    <!-- Adding column image on table pizza-->
+    <include file="db/changelog/DDL/1713484260640-changelog.yaml"/>
+
+    <!-- Populate pizza table -->
+    <include file="/db/changelog/DML/populate_pizza_table.yaml"/>
+
 </databaseChangeLog>

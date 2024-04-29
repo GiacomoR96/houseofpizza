@@ -2,8 +2,8 @@ package com.houseofpizza.assembler;
 
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.bin.OrderingBin;
-import com.houseofpizza.resource.OrderingModel;
+import com.houseofpizza.dto.OrderingBin;
+import com.houseofpizza.representation.OrderingModel;
 
 @Component
 public class OrderingAssembler {
