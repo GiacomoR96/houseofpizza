@@ -1,8 +1,8 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.bin.StatusOrderBin;
-import com.houseofpizza.entity.Pizza;
-import com.houseofpizza.resource.StatusOrderModel;
+import com.houseofpizza.dto.StatusOrderBin;
+import com.houseofpizza.model.Pizza;
+import com.houseofpizza.representation.StatusOrderModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,8 +23,8 @@ class StatusOrderAssemblerTest {
         StatusOrderModel resource = assembler.populateStatusOrderModel(mockOutput());
         assertNotNull(resource);
         assertEquals(Integer.MIN_VALUE, resource.getOrderNumber());
-        assertNotNull(resource.getPizzaOrderingDto());
-        assertEquals(1, resource.getPizzaOrderingDto().size());
+        assertNotNull(resource.getPizzaOrderingModel());
+        assertEquals(1, resource.getPizzaOrderingModel().size());
     }
 
     private StatusOrderBin mockOutput() {

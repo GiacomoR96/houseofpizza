@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.houseofpizza.assembler.StatusOrderAssembler;
-import com.houseofpizza.bin.StatusOrderBin;
-import com.houseofpizza.error.ErrorException;
+import com.houseofpizza.dto.StatusOrderBin;
+import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.factory.StatusOrderBinFactory;
-import com.houseofpizza.resource.StatusOrderModel;
+import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.service.StatusOrderService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,16 +30,14 @@ public class StatusOrderController {
     @Autowired
     private StatusOrderAssembler statusOrderAssembler;
 
-
-    @GetMapping(value = {"/pizza/statusMyOrder/{orderNumber}"}, produces = {APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/pizza/statusMyOrder/{orderNumber}", produces = APPLICATION_JSON_VALUE)
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "NOT FOUND")
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
     public ResponseEntity<StatusOrderModel> getStatusMyOrder(
-        @RequestParam(name = "orderNumber", required = true) final Integer orderNumber
-    ) throws ErrorException {
+        @RequestParam(name = "orderNumber") final Integer orderNumber) throws ErrorException {
         StatusOrderBin bin = StatusOrderBinFactory.create(orderNumber);
         StatusOrderBin output = service.getStatusOrderService(bin);
 

@@ -1,6 +1,6 @@
 package com.houseofpizza.factory;
 
-import com.houseofpizza.bin.StatusOrderBin;
+import com.houseofpizza.dto.StatusOrderBin;
 
 import lombok.experimental.UtilityClass;
 

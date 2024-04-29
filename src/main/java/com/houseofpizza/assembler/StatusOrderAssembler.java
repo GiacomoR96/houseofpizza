@@ -7,10 +7,10 @@ import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.bin.StatusOrderBin;
-import com.houseofpizza.entity.Pizza;
-import com.houseofpizza.resource.StatusOrderModel;
-import com.houseofpizza.resource.dto.PizzaOrderingDto;
+import com.houseofpizza.dto.StatusOrderBin;
+import com.houseofpizza.model.Pizza;
+import com.houseofpizza.representation.StatusOrderModel;
+import com.houseofpizza.representation.dto.PizzaOrderingModel;
 
 @Component
 public class StatusOrderAssembler {
@@ -19,8 +19,8 @@ public class StatusOrderAssembler {
         return new StatusOrderModel(bin.getOrderNumber(), mapPizzaOrderingApiList(bin.getPizzaMap()));
     }
 
-    private List<PizzaOrderingDto> mapPizzaOrderingApiList(Map<Pizza, String> entityList) {
-        List<PizzaOrderingDto> list = new ArrayList<>();
+    private List<PizzaOrderingModel> mapPizzaOrderingApiList(Map<Pizza, String> entityList) {
+        List<PizzaOrderingModel> list = new ArrayList<>();
         if (MapUtils.isNotEmpty(entityList)) {
             entityList.forEach((k, v) -> {
                 list.add(populatePizzaOrderingApi(k, v));
@@ -29,8 +29,8 @@ public class StatusOrderAssembler {
         return list;
     }
 
-    private PizzaOrderingDto populatePizzaOrderingApi(Pizza element, String status) {
-        PizzaOrderingDto api = new PizzaOrderingDto();
+    private PizzaOrderingModel populatePizzaOrderingApi(Pizza element, String status) {
+        PizzaOrderingModel api = new PizzaOrderingModel();
         api.setStatus(status);
         api.setPizzaName(element.getName());
         api.setPrice(element.getPrice());

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.houseofpizza.assembler.OrderProcessingAssembler;
-import com.houseofpizza.bin.OrderProcessingBin;
-import com.houseofpizza.error.ErrorException;
-import com.houseofpizza.resource.OrderProcessingModel;
+import com.houseofpizza.dto.OrderProcessingBin;
+import com.houseofpizza.exceptions.ErrorException;
+import com.houseofpizza.representation.OrderProcessingModel;
 import com.houseofpizza.service.OrderProcessingService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,7 +28,7 @@ public class OrderProcessingController {
     @Autowired
     private OrderProcessingAssembler assembler;
 
-    @GetMapping(value = {"/pizza/orderProcessing"}, produces = {APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/pizza/orderProcessing", produces = APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")

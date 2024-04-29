@@ -15,6 +15,9 @@ databaseChangeLog:
               - column:
                   name: price
                   value: 5.5
+              - column:
+                  name: image
+                  value: margherita.jpg
         - insert:
             tableName: pizza
             columns:
@@ -27,6 +30,9 @@ databaseChangeLog:
               - column:
                   name: price
                   value: 7.0
+              - column:
+                  name: image
+                  value: capricciosa.jpg
         - insert:
             tableName: pizza
             columns:
@@ -39,3 +45,111 @@ databaseChangeLog:
               - column:
                   name: price
                   value: 8
+              - column:
+                  name: image
+                  value: salsiccia_friarielli.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: 'Biancaneve'
+              - column:
+                  name: price
+                  value: 5
+              - column:
+                  name: image
+                  value: biancaneve.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: 'Diavola'
+              - column:
+                  name: price
+                  value: 7
+              - column:
+                  name: image
+                  value: diavola.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: 'Quattro stagioni'
+              - column:
+                  name: price
+                  value: 9
+              - column:
+                  name: image
+                  value: quattro_stagioni.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: name
+                  value: 'Marinara'
+              - column:
+                  name: price
+                  value: 6
+              - column:
+                  name: image
+                  value: marinara.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: name
+                  value: 'Parmigiana'
+              - column:
+                  name: price
+                  value: 9.5
+              - column:
+                  name: image
+                  value: parmigiana.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: name
+                  value: 'Vegetariana'
+              - column:
+                  name: price
+                  value: 11
+              - column:
+                  name: image
+                  value: vegetariana.jpg
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: name
+                  value: 'Porcina'
+              - column:
+                  name: price
+                  value: 8
+              - column:
+                  name: image
+                  value: porcina.jpg

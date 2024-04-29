@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.bin.OrderProcessingBin;
-import com.houseofpizza.resource.OrderProcessingModel;
+import com.houseofpizza.dto.OrderProcessingBin;
+import com.houseofpizza.representation.OrderProcessingModel;
 
 @Component
 public class OrderProcessingAssembler {
