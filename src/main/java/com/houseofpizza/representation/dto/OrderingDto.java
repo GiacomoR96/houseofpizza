@@ -1,11 +1,19 @@
 package com.houseofpizza.representation.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
-// TODO Change this class
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 @Data
 public class OrderingDto {
 
-    private String pizzaName;
+    @Valid
+    private List<@Valid ProductDto> products;
+
+    @NotNull
+    private String personName;
 
 }

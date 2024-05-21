@@ -2,17 +2,17 @@ package com.houseofpizza.representation;
 
 import java.util.List;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.houseofpizza.representation.dto.PizzaOrderingModel;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class StatusOrderModel {
+@Getter
+@Setter
+public class StatusOrderModel extends RepresentationModel<StatusOrderModel> {
 
-    private Integer orderNumber;
     private List<PizzaOrderingModel> pizzaOrderingModel;
 
 }

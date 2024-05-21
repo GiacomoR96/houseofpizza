@@ -19,12 +19,16 @@ public class ErrorException extends ResponseStatusException {
         throws ErrorException {
         return Optional.ofNullable(queryResults)
             .filter(CollectionUtils::isNotEmpty)
-            .orElseThrow(() -> generateErrorException(HttpStatus.NOT_FOUND, error));
+            .orElseThrow(() -> generateException(error));
     }
 
     public static <T> T extractFirstOrThrowNotFound(List<T> queryResults, ErrorCodes error) {
         return Optional.ofNullable(queryResults).flatMap(list -> list.stream().findFirst())
-            .orElseThrow(() -> generateErrorException(HttpStatus.NOT_FOUND, error));
+            .orElseThrow(() -> generateException(error));
+    }
+
+    public static ErrorException generateException(ErrorCodes error) {
+        return generateErrorException(HttpStatus.NOT_FOUND, error);
     }
 
 }

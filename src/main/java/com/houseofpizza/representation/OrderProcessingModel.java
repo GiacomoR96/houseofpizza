@@ -1,12 +1,14 @@
 package com.houseofpizza.representation;
 
-import java.util.List;
+import org.springframework.hateoas.RepresentationModel;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class OrderProcessingModel {
+@Getter
+@Setter
+public class OrderProcessingModel extends RepresentationModel<OrderProcessingModel> {
 
-    private List<Integer> orderNumber;
+    private Long orderNumber;
 
 }

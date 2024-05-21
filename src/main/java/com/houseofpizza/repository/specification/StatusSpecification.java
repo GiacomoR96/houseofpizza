@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class StatusSpecification {
 
-    public Specification<Status> withStatusIdEqualTo(final Integer statusId) {
+    public Specification<Status> withStatusIdEqualTo(final Long statusId) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
             .equal(root.get(Status.Fields.id), statusId));
     }

@@ -14,4 +14,7 @@
     <!-- Populate pizza table -->
     <include file="/db/changelog/DML/populate_pizza_table.yaml"/>
 
+    <!-- Removing email from order table -->
+    <include file="db/changelog/DDL/1716114222957-changelog.yaml"/>
+
 </databaseChangeLog>

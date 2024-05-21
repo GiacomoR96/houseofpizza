@@ -1,9 +1,13 @@
 package com.houseofpizza.representation;
 
-import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
-@Data
-public class ProductsModel {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ProductsModel extends RepresentationModel<ProductsModel> {
 
     private Long id;
     private String name;

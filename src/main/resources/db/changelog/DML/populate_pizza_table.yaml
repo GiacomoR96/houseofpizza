@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: Giacomo
+      author: giacomo.romano
       changes:
         - insert:
             tableName: pizza

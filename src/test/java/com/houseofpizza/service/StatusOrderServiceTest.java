@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.houseofpizza.dto.StatusOrderBin;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.PizzaToOrder;
 import com.houseofpizza.model.Status;
@@ -26,6 +25,8 @@ import com.houseofpizza.repository.StatusRepository;
 
 @ExtendWith(MockitoExtension.class)
 class StatusOrderServiceTest {
+
+    private Pizza pizza;
 
     @Mock
     private PizzaToOrderRepository pizzaToOrderRepository;
@@ -41,6 +42,7 @@ class StatusOrderServiceTest {
 
     @BeforeEach
     void setUp() {
+        pizza = getMockPizzaEntity();
     }
 
     @Test
@@ -50,7 +52,7 @@ class StatusOrderServiceTest {
             .when(pizzaToOrderRepository)
             .findAll(any(Specification.class));
 
-        doReturn(getMockPizzaEntityList())
+        doReturn(Collections.singletonList(pizza))
             .when(pizzaRepository)
             .findAll(any(Specification.class));
 
@@ -58,29 +60,17 @@ class StatusOrderServiceTest {
             .when(statusRepository)
             .findAll(any(Specification.class));
 
-        StatusOrderBin out = service.getStatusOrderService(retrieveStatusOrderBin());
-        Assertions.assertNotNull(out);
-        Assertions.assertNotNull(out.getOrderNumber());
-        Assertions.assertEquals(100, out.getOrderNumber().intValue());
-        Assertions.assertNotNull(out.getPizzaMap());
-
-        // TODO : FIX ME
-        Map<Pizza, String> map = out.getPizzaMap();
-        //Assertions.assertTrue(map.containsKey(getMockPizzaEntity()));
-        //Assertions.assertTrue(map.containsValue("In coda"));
-    }
-
-    private StatusOrderBin retrieveStatusOrderBin() {
-        return StatusOrderBin.builder()
-            .orderNumber(100)
-            .build();
+        Map<Pizza, String> map = service.getStatusOrderService(100L);
+        Assertions.assertNotNull(map);
+        Assertions.assertTrue(map.containsKey(pizza));
+        Assertions.assertTrue(map.containsValue("In queue"));
     }
 
     private PizzaToOrder getMockPizzaToOrderEntity() {
         PizzaToOrder entity = new PizzaToOrder();
-        entity.setIdOrder(1);
-        entity.setIdPizza(1);
-        entity.setIdStatus(1);
+        entity.setIdOrder(1L);
+        entity.setIdPizza(1L);
+        entity.setIdStatus(1L);
         return entity;
     }
 
@@ -90,20 +80,16 @@ class StatusOrderServiceTest {
 
     private Pizza getMockPizzaEntity() {
         Pizza entity = new Pizza();
-        entity.setId(1);
+        entity.setId(1L);
         entity.setName("Carbonara");
         entity.setPrice(6.0);
         return entity;
     }
 
-    private List<Pizza> getMockPizzaEntityList() {
-        return Collections.singletonList(getMockPizzaEntity());
-    }
-
     private Status getMockStatusEntity() {
         Status entity = new Status();
-        entity.setId(1);
-        entity.setStatus("In coda");
+        entity.setId(1L);
+        entity.setStatus("In queue");
         return entity;
     }
 

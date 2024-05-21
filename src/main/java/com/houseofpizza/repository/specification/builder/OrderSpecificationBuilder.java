@@ -14,12 +14,4 @@ public class OrderSpecificationBuilder {
         return Specification.where(OrderSpecification.withPersonNameEqualTo(personName));
     }
 
-    public Specification<Order> withEmailEqualTo(String email) {
-        return Specification.where(OrderSpecification.withEmailEqualTo(email));
-    }
-
-    public Specification<Order> withPersonNameAndEmailEqualTo(String personName, String email) {
-        return withPersonNameEqualTo(personName).and(withEmailEqualTo(email));
-    }
-
 }

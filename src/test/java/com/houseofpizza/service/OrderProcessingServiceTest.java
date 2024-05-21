@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.houseofpizza.dto.OrderProcessingBin;
 import com.houseofpizza.model.PizzaToOrder;
 import com.houseofpizza.model.Status;
 import com.houseofpizza.repository.PizzaToOrderRepository;
@@ -42,17 +41,16 @@ class OrderProcessingServiceTest {
             .when(statusRepository)
             .findAll(any(Specification.class));
 
-        OrderProcessingBin out = service.getOrderProcessing();
-        Assertions.assertNotNull(out);
-        Assertions.assertNotNull(out.getOrderNumber());
-        Assertions.assertEquals(1, out.getOrderNumber().size());
+        List<Long> output = service.getOrderProcessing();
+        Assertions.assertNotNull(output);
+        Assertions.assertEquals(1, output.size());
     }
 
     private PizzaToOrder getMockPizzaToOrderEntity() {
         PizzaToOrder entity = new PizzaToOrder();
-        entity.setIdOrder(1);
-        entity.setIdPizza(1);
-        entity.setIdStatus(1);
+        entity.setIdOrder(1L);
+        entity.setIdPizza(1L);
+        entity.setIdStatus(1L);
         return entity;
     }
 
@@ -62,8 +60,8 @@ class OrderProcessingServiceTest {
 
     private Status getMockStatusEntity() {
         Status entity = new Status();
-        entity.setId(1);
-        entity.setStatus("In coda");
+        entity.setId(1L);
+        entity.setStatus("In queue");
         return entity;
     }
 

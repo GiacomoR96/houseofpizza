@@ -26,15 +26,12 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "person_name")
     private String personName;
 
     @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "email")
-    private String email;
 
 }

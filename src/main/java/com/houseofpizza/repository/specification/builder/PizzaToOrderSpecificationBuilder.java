@@ -10,7 +10,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PizzaToOrderSpecificationBuilder {
 
-    public Specification<PizzaToOrder> withIdOrderEqualTo(Integer orderNumber) {
+    public Specification<PizzaToOrder> withIdOrderEqualTo(Long orderNumber) {
         return Specification.where(PizzaToOrderSpecification.withIdOrderEqualTo(orderNumber));
     }
 

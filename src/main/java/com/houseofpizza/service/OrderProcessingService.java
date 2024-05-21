@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.houseofpizza.dto.OrderProcessingBin;
 import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.PizzaToOrder;
@@ -33,22 +32,22 @@ public class OrderProcessingService {
     @Autowired
     private StatusRepository statusRepository;
 
-    public OrderProcessingBin getOrderProcessing() throws ErrorException, InterruptedException {
+    public List<Long> getOrderProcessing() throws ErrorException, InterruptedException {
         log.info("Begin service method getOrderProcessing");
-        List<Integer> orderNumbers = new ArrayList<>();
+        List<Long> orderNumbers = new ArrayList<>();
 
-        List<Status> statusList = retrieveStatusByStatus("In coda");
+        List<Status> statusList = retrieveStatusByStatus("In queue");
         for (Status element : statusList) {
             PizzaToOrder pizzaToOrder = retrievePizzaToOrderByIdStatus(element.getId());
 
-            element.setStatus("In lavorazione");
+            element.setStatus("Processing");
             log.info("I process the order number: {} and pizzaId: {} and status: {}", pizzaToOrder.getIdOrder(),
                 pizzaToOrder.getIdPizza(), element.getStatus());
             statusRepository.saveAndFlush(element);
 
             TimeUnit.SECONDS.sleep(10);
 
-            element.setStatus("Completato");
+            element.setStatus("Completed");
             log.info("Finished processing for order: {} and pizzaId: {} and status: {}", pizzaToOrder.getIdOrder(),
                 pizzaToOrder.getIdPizza(), element.getStatus());
             statusRepository.saveAndFlush(element);
@@ -56,9 +55,7 @@ public class OrderProcessingService {
         }
 
         log.info("End service method getOrderProcessing");
-        return OrderProcessingBin.builder()
-            .orderNumber(orderNumbers)
-            .build();
+        return orderNumbers;
     }
 
     private List<Status> retrieveStatusByStatus(String status) {
@@ -67,7 +64,7 @@ public class OrderProcessingService {
             ErrorCodes.ELEMENTS_TO_ELABORATE_NOT_FOUND);
     }
 
-    private PizzaToOrder retrievePizzaToOrderByIdStatus(Integer idStatus) {
+    private PizzaToOrder retrievePizzaToOrderByIdStatus(Long idStatus) {
         Specification<PizzaToOrder> pizzaToOrderSpecification =
             PizzaToOrderSpecification.withIdStatusEqualTo(idStatus);
         return extractFirstOrThrowNotFound(pizzaToOrderRepository.findAll(pizzaToOrderSpecification),

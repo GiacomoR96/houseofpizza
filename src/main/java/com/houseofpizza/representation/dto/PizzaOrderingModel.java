@@ -1,11 +1,17 @@
 package com.houseofpizza.representation.dto;
 
-import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
-@Data
-public class PizzaOrderingModel {
+import com.houseofpizza.representation.OrderingModel;
 
-    private String pizzaName;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class PizzaOrderingModel extends RepresentationModel<OrderingModel> {
+
+    private String name;
     private Double price;
     private String status;
 

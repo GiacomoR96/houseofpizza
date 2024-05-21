@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import com.houseofpizza.assembler.StatusOrderAssembler;
-import com.houseofpizza.dto.StatusOrderBin;
 import com.houseofpizza.representation.StatusOrderModel;
+import com.houseofpizza.representation.dto.PizzaOrderingModel;
 import com.houseofpizza.service.StatusOrderService;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,17 +34,29 @@ class StatusOrderControllerTest {
     private StatusOrderController controller;
 
     @Test
-    public void getStatusMyOrder() {
-        when(assembler.populateStatusOrderModel(any())).thenReturn(
-            new StatusOrderModel(Integer.MIN_VALUE, Collections.emptyList()));
-        given(service.getStatusOrderService(any())).willReturn(StatusOrderBin.builder().build());
+    void getStatusMyOrder() {
+        when(assembler.toModel(any())).thenReturn(mockStatusOrderModel());
+        given(service.getStatusOrderService(any())).willReturn(new HashMap<>());
 
-        ResponseEntity<StatusOrderModel> response = controller.getStatusMyOrder(Integer.MIN_VALUE);
+        ResponseEntity<StatusOrderModel> response = controller.getStatusOrder(Long.MIN_VALUE);
         assertNotNull(response);
         StatusOrderModel body = response.getBody();
         assertNotNull(body);
-        assertEquals(Integer.MIN_VALUE, body.getOrderNumber());
-        assertEquals(0, body.getPizzaOrderingModel().size());
+        assertEquals(1, body.getPizzaOrderingModel().size());
+    }
+
+    private StatusOrderModel mockStatusOrderModel() {
+        StatusOrderModel model = new StatusOrderModel();
+        model.setPizzaOrderingModel(Collections.singletonList(mockPizzaOrderingModel()));
+        return model;
+    }
+
+    private PizzaOrderingModel mockPizzaOrderingModel() {
+        PizzaOrderingModel model = new PizzaOrderingModel();
+        model.setName("Carbonara");
+        model.setPrice(6.0);
+        model.setStatus("In queue");
+        return model;
     }
 
 }
