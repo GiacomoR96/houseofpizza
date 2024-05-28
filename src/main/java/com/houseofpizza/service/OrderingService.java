@@ -1,31 +1,24 @@
 package com.houseofpizza.service;
 
 import static com.houseofpizza.exceptions.ErrorException.checkNotEmptyListOrThrowNotFound;
-import static com.houseofpizza.exceptions.ErrorException.extractFirstOrThrowNotFound;
+import static com.houseofpizza.factory.OrderingFactory.buildOrder;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.houseofpizza.dto.OrderingBin;
 import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
-import com.houseofpizza.model.PizzaToOrder;
 import com.houseofpizza.model.Status;
 import com.houseofpizza.repository.OrderRepository;
-import com.houseofpizza.repository.PizzaRepository;
-import com.houseofpizza.repository.PizzaToOrderRepository;
-import com.houseofpizza.repository.StatusRepository;
 import com.houseofpizza.repository.specification.builder.OrderSpecificationBuilder;
-import com.houseofpizza.repository.specification.builder.PizzaSpecificationBuilder;
 import com.houseofpizza.representation.dto.OrderingDto;
+import com.houseofpizza.representation.dto.ProductDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,74 +28,47 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderingService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepository repository;
 
     @Autowired
-    private PizzaRepository pizzaRepository;
+    private PizzaService pizzaService;
 
     @Autowired
-    private PizzaToOrderRepository pizzaToOrderRepository;
+    private PizzaToOrderService pizzaToOrderService;
 
     @Autowired
-    private StatusRepository statusRepository;
+    private StatusOrderService statusOrderService;
 
-    public OrderingBin postOrderingService(OrderingBin bin) throws ErrorException {
-        log.info("Begin service method postOrderingService");
-        List<OrderingDto> orderingDtoList = bin.getDto().getOrderingDtoList();
+    // TODO: Add data control logic on id provided in input before saving to database
+    public Long orderCreation(OrderingDto dto) throws ErrorException {
+        log.info("Begin service method orderCreation");
+        List<ProductDto> productDtoList = dto.getProducts();
 
-        checkNotEmptyListOrThrowNotFound(orderingDtoList, ErrorCodes.LIST_NOT_FOUND);
-        Order order = retrieveOrderByPersonNameAndEmail(bin.getPersonName(), bin.getEmail());
+        checkNotEmptyListOrThrowNotFound(productDtoList, ErrorCodes.LIST_NOT_FOUND);
+        Order order = retrieveOrSaveOrderByPersonName(dto.getPersonName());
 
-        for (OrderingDto orderingDto : orderingDtoList) {
-            Pizza pizza = retrievePizzaByName(orderingDto.getPizzaName());
-            Status status = statusRepository.save(prepareStatusEntityForSave());
-            pizzaToOrderRepository.save(preparePizzaToOrderEntityForSave(order.getId(), pizza.getId(), status.getId()));
+        for (ProductDto productDto : productDtoList) {
+            for (var i = 0; i < productDto.getQuantity(); i++) {
+                Pizza pizza = pizzaService.findPizzaByidPizza(productDto.getId());
+                Status status = statusOrderService.saveBaseStatusOrder();
+                pizzaToOrderService.saveBasePizzaToOrder(order.getId(), pizza.getId(), status.getId());
+            }
         }
 
         log.info("Service orderId output : {}", order.getId());
-        log.info("End service method postOrderingService");
-        return OrderingBin.builder()
-            .orderNumber(order.getId())
-            .build();
+        log.info("End service method orderCreation");
+        return order.getId();
     }
 
-    private Order prepareOrderEntityForSave(String personName, LocalDate date, String email) {
-        Order entity = new Order();
-        entity.setPersonName(personName);
-        entity.setDate(date);
-        entity.setEmail(email);
-        return entity;
-    }
-
-    private Order saveAndRetrieveOrderEntity(String personName, String email) {
-        LocalDate date = LocalDate.now();
-        return orderRepository.save(prepareOrderEntityForSave(personName, date, email));
-    }
-
-    private Order retrieveOrderByPersonNameAndEmail(String personName, String email) {
+    private Order retrieveOrSaveOrderByPersonName(String personName) {
         Specification<Order> orderSpecification =
-            OrderSpecificationBuilder.withPersonNameAndEmailEqualTo(personName, email);
-        return Optional.of(orderRepository.findAll(orderSpecification)).flatMap(list -> list.stream().findFirst())
-            .orElseGet(() -> saveAndRetrieveOrderEntity(personName, email));
-    }
+            OrderSpecificationBuilder.withPersonNameEqualTo(personName);
 
-    private Pizza retrievePizzaByName(String name) {
-        Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withNameEqualTo(name);
-        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.PIZZA_NOT_FOUND);
-    }
-
-    private Status prepareStatusEntityForSave() {
-        Status entity = new Status();
-        entity.setStatus("In coda");
-        return entity;
-    }
-
-    private PizzaToOrder preparePizzaToOrderEntityForSave(Integer idOrder, Integer idPizza, Integer idStatus) {
-        PizzaToOrder entity = new PizzaToOrder();
-        entity.setIdOrder(idOrder);
-        entity.setIdPizza(idPizza);
-        entity.setIdStatus(idStatus);
-        return entity;
+        return repository.findAll(orderSpecification)
+            .stream().findFirst()
+            .orElseGet(() ->
+                repository.save(buildOrder(personName))
+            );
     }
 
 }

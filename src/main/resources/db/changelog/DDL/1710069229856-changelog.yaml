@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1710069229856-1
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -13,7 +13,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_pizza
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: name
                   type: VARCHAR(255)
@@ -23,10 +23,9 @@ databaseChangeLog:
             tableName: pizza
   - changeSet:
       id: 1710069229856-2
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - dropTable:
             cascadeConstraints: true
             tableName: t_pizza
-

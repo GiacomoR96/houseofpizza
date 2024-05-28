@@ -1,24 +1,31 @@
 package com.houseofpizza.assembler;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.context.annotation.Scope;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.dto.OrderProcessingBin;
+import com.houseofpizza.controller.OrderProcessingController;
 import com.houseofpizza.representation.OrderProcessingModel;
 
-@Component
-public class OrderProcessingAssembler {
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
-    public OrderProcessingModel populateModel(OrderProcessingBin bin) {
-        OrderProcessingModel model = new OrderProcessingModel();
-        model.setOrderNumber(populate(bin.getOrderNumber()));
-        return model;
+@Slf4j
+@Scope("prototype")
+@Component
+public class OrderProcessingAssembler extends
+    RepresentationModelAssemblerSupport<Long, OrderProcessingModel> {
+
+    public OrderProcessingAssembler() {
+        super(OrderProcessingController.class, OrderProcessingModel.class);
     }
 
-    private List<Integer> populate(List<Integer> orderNumber) {
-        return new ArrayList<>(orderNumber);
+    @Override
+    @NonNull
+    public OrderProcessingModel toModel(@NonNull Long order) {
+        OrderProcessingModel model = new OrderProcessingModel();
+        model.setOrderNumber(order);
+        return model;
     }
 
 }

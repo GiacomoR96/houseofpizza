@@ -5,35 +5,48 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.dto.StatusOrderBin;
+import com.houseofpizza.controller.StatusOrderController;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.PizzaOrderingModel;
 
-@Component
-public class StatusOrderAssembler {
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
-    public StatusOrderModel populateStatusOrderModel(StatusOrderBin bin) {
-        return new StatusOrderModel(bin.getOrderNumber(), mapPizzaOrderingApiList(bin.getPizzaMap()));
+@Slf4j
+@Scope("prototype")
+@Component
+public class StatusOrderAssembler extends RepresentationModelAssemblerSupport<Map<Pizza, String>, StatusOrderModel> {
+
+    public StatusOrderAssembler() {
+        super(StatusOrderController.class, StatusOrderModel.class);
+    }
+
+    @Override
+    @NonNull
+    public StatusOrderModel toModel(@NonNull Map<Pizza, String> entity) {
+        StatusOrderModel statusOrderModel = new StatusOrderModel();
+        statusOrderModel.setPizzaOrderingModel(mapPizzaOrderingApiList(entity));
+        return statusOrderModel;
     }
 
     private List<PizzaOrderingModel> mapPizzaOrderingApiList(Map<Pizza, String> entityList) {
         List<PizzaOrderingModel> list = new ArrayList<>();
         if (MapUtils.isNotEmpty(entityList)) {
-            entityList.forEach((k, v) -> {
-                list.add(populatePizzaOrderingApi(k, v));
-            });
+            entityList.forEach((k, v) -> list.add(populatePizzaOrderingApi(k, v)));
         }
         return list;
     }
 
     private PizzaOrderingModel populatePizzaOrderingApi(Pizza element, String status) {
         PizzaOrderingModel api = new PizzaOrderingModel();
-        api.setStatus(status);
-        api.setPizzaName(element.getName());
+        api.setName(element.getName());
         api.setPrice(element.getPrice());
+        api.setStatus(status);
         return api;
     }
 

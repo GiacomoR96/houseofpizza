@@ -14,9 +14,4 @@ public class OrderSpecification {
             .equal(root.get(Order.Fields.personName), personName));
     }
 
-    public Specification<Order> withEmailEqualTo(final String email) {
-        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-            .equal(root.get(Order.Fields.email), email));
-    }
-
 }

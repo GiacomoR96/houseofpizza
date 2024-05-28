@@ -24,14 +24,14 @@ public class PizzaToOrder implements Serializable {
 
     @Id
     @Column(name = "id_order")
-    private Integer idOrder;
+    private Long idOrder;
 
     @Id
     @Column(name = "id_pizza")
-    private Integer idPizza;
+    private Long idPizza;
 
     @Id
     @Column(name = "id_status")
-    private Integer idStatus;
+    private Long idStatus;
 
 }

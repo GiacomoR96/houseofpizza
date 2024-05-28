@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1716114222957-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: email
+            tableName: order

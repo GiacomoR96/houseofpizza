@@ -1,33 +1,25 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.dto.OrderProcessingBin;
-import com.houseofpizza.representation.OrderProcessingModel;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.houseofpizza.representation.OrderProcessingModel;
 
 @ExtendWith(MockitoExtension.class)
 class OrderProcessingAssemblerTest {
 
-    private OrderProcessingAssembler assembler = new OrderProcessingAssembler();
+    @InjectMocks
+    private OrderProcessingAssembler assembler;
 
     @Test
-    public void populateStatusOrderModelTest() {
-        OrderProcessingModel resource = assembler.populateModel(mockOutput());
+    void populateStatusOrderModelTest() {
+        OrderProcessingModel resource = assembler.toModel(Long.MAX_VALUE);
         assertNotNull(resource);
         assertNotNull(resource.getOrderNumber());
-        assertEquals(2, resource.getOrderNumber().size());
-    }
-
-    private OrderProcessingBin mockOutput() {
-        return OrderProcessingBin.builder()
-                .orderNumber(Arrays.asList(Integer.MAX_VALUE, Integer.MIN_VALUE))
-                .build();
     }
 
 }

@@ -1,31 +1,27 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.dto.OrderingBin;
-import com.houseofpizza.representation.OrderingModel;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.houseofpizza.representation.OrderingModel;
 
 @ExtendWith(MockitoExtension.class)
 class OrderingAssemblerTest {
 
-    private final OrderingAssembler assembler = new OrderingAssembler();
+    @InjectMocks
+    private OrderingAssembler assembler;
 
     @Test
-    public void populateStatusOrderModelTest() {
-        OrderingModel resource = assembler.populateModel(mockOutput());
+    void populateStatusOrderModelTest() {
+        OrderingModel resource = assembler.toModel(Long.MAX_VALUE);
         assertNotNull(resource);
         assertNotNull(resource.getOrderNumber());
-        assertNotEquals(Integer.MIN_VALUE, resource.getOrderNumber());
-    }
-
-    private OrderingBin mockOutput() {
-        return OrderingBin.builder()
-                .orderNumber(Integer.MAX_VALUE)
-                .build();
+        assertEquals(Long.MAX_VALUE, resource.getOrderNumber());
     }
 
 }

@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1710028327105-1
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -13,7 +13,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_order
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: person_name
                   type: VARCHAR(255)
@@ -26,7 +26,7 @@ databaseChangeLog:
             tableName: order
   - changeSet:
       id: 1710028327105-2
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -55,7 +55,7 @@ databaseChangeLog:
             tableName: pizza_to_order
   - changeSet:
       id: 1710028327105-3
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -67,14 +67,14 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_status
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: status
                   type: VARCHAR(255)
             tableName: status
   - changeSet:
       id: 1710028327105-4
-      author: Giacomo (generated)
+      author: giacomo.romano
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -86,7 +86,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_t_pizza
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: name
                   type: VARCHAR(255)

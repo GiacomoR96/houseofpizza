@@ -14,9 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import com.houseofpizza.assembler.OrderingAssembler;
-import com.houseofpizza.dto.OrderingBin;
 import com.houseofpizza.representation.OrderingModel;
-import com.houseofpizza.representation.dto.CreatePizzaOrderingDto;
+import com.houseofpizza.representation.dto.OrderingDto;
 import com.houseofpizza.service.OrderingService;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,11 +31,11 @@ class OrderingControllerTest {
     private OrderingController controller;
 
     @Test
-    public void getStatusMyOrder() {
-        when(assembler.populateModel(any())).thenReturn(new OrderingModel());
-        given(service.postOrderingService(any())).willReturn(OrderingBin.builder().build());
+    void getStatusMyOrder() {
+        when(assembler.toModel(any())).thenReturn(new OrderingModel());
+        given(service.orderCreation(any())).willReturn(null);
 
-        ResponseEntity<OrderingModel> response = controller.postOrdering(new CreatePizzaOrderingDto(), "", "");
+        ResponseEntity<OrderingModel> response = controller.orderCreation(new OrderingDto());
         assertNotNull(response);
         OrderingModel body = response.getBody();
         assertNotNull(body);

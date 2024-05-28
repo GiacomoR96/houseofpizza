@@ -1,25 +1,38 @@
 package com.houseofpizza.assembler;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.context.annotation.Scope;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.mapper.PizzaMapper;
+import com.houseofpizza.controller.OrderingController;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.ProductsModel;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Scope("prototype")
 @Component
-public class PizzaAssembler {
+public class PizzaAssembler extends RepresentationModelAssemblerSupport<Pizza, ProductsModel> {
 
-    public List<ProductsModel> instantiateModel(List<Pizza> entityList) {
-        List<ProductsModel> responseModelList = new ArrayList<>();
-        for (Pizza pizza : entityList) {
-            ProductsModel responseModel = PizzaMapper.INSTANCE.entityToModel(pizza);
-            responseModelList.add(responseModel);
-        }
+    public PizzaAssembler() {
+        super(OrderingController.class, ProductsModel.class);
+    }
 
-        return responseModelList;
+    @Override
+    @NonNull
+    public ProductsModel toModel(@NonNull Pizza entity) {
+// TODO : Resolve this problem on mapper
+// return PizzaMapper.INSTANCE.entityToModel(entity);
+        ProductsModel productsModel = new ProductsModel();
+
+        productsModel.setId(entity.getId());
+        productsModel.setName(entity.getName());
+        productsModel.setPrice(entity.getPrice());
+        productsModel.setImage(entity.getImage());
+
+        return productsModel;
     }
 
     // TODO : Useful method for supplying the byte array to FE

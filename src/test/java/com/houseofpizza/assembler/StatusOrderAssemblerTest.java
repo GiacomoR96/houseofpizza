@@ -1,42 +1,37 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.dto.StatusOrderBin;
-import com.houseofpizza.model.Pizza;
-import com.houseofpizza.representation.StatusOrderModel;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.houseofpizza.model.Pizza;
+import com.houseofpizza.representation.StatusOrderModel;
 
 @ExtendWith(MockitoExtension.class)
 class StatusOrderAssemblerTest {
 
-    private StatusOrderAssembler assembler = new StatusOrderAssembler();
+    @InjectMocks
+    private StatusOrderAssembler assembler;
 
     @Test
-    public void populateStatusOrderModelTest() {
-        StatusOrderModel resource = assembler.populateStatusOrderModel(mockOutput());
+    void populateStatusOrderModelTest() {
+        StatusOrderModel resource = assembler.toModel(mockPizzaMap());
         assertNotNull(resource);
-        assertEquals(Integer.MIN_VALUE, resource.getOrderNumber());
         assertNotNull(resource.getPizzaOrderingModel());
         assertEquals(1, resource.getPizzaOrderingModel().size());
     }
 
-    private StatusOrderBin mockOutput() {
-        return StatusOrderBin.builder()
-                .orderNumber(Integer.MIN_VALUE)
-                .pizzaMap(mockPizzaList())
-                .build();
-    }
-
-    private Map<Pizza, String> mockPizzaList() {
+    private Map<Pizza, String> mockPizzaMap() {
         Map<Pizza, String> map = new HashMap<>();
-        map.put(new Pizza(), "1");
+        map.put(new Pizza(), "In queue");
         return map;
     }
+
 }
