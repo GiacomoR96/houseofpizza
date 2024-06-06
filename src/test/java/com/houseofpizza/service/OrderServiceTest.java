@@ -24,7 +24,7 @@ import com.houseofpizza.representation.dto.OrderingDto;
 import com.houseofpizza.representation.dto.ProductDto;
 
 @ExtendWith(MockitoExtension.class)
-class OrderingServiceTest {
+class OrderServiceTest {
 
     @Mock
     private PizzaToOrderService pizzaToOrderService;
@@ -33,13 +33,13 @@ class OrderingServiceTest {
     private PizzaService pizzaService;
 
     @Mock
-    private StatusOrderService statusOrderService;
+    private OrderStatusService orderStatusService;
 
     @Mock
     private OrderRepository orderRepository;
 
     @InjectMocks
-    private OrderingService service;
+    private OrderService service;
 
     @Test
     void getStatusOrderService() {
@@ -48,7 +48,7 @@ class OrderingServiceTest {
             .findAll(any(Specification.class));
 
         when(pizzaService.findPizzaByidPizza(anyLong())).thenReturn(getMockPizzaEntity());
-        when(statusOrderService.saveBaseStatusOrder()).thenReturn(getMockStatusEntity());
+        when(orderStatusService.saveBaseStatusOrder()).thenReturn(getMockStatusEntity());
 
 
         Long result = service.orderCreation(getMockPizzaOrderingDto());

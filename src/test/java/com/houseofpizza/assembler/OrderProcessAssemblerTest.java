@@ -10,13 +10,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.houseofpizza.representation.OrderProcessingModel;
 
 @ExtendWith(MockitoExtension.class)
-class OrderProcessingAssemblerTest {
+class OrderProcessAssemblerTest {
 
     @InjectMocks
-    private OrderProcessingAssembler assembler;
+    private OrderProcessAssembler assembler;
 
     @Test
-    void populateStatusOrderModelTest() {
+    void assemblerToModelTest() {
         OrderProcessingModel resource = assembler.toModel(Long.MAX_VALUE);
         assertNotNull(resource);
         assertNotNull(resource.getOrderNumber());

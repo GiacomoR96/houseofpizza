@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import com.houseofpizza.controller.StatusOrderController;
+import com.houseofpizza.controller.OrderController;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.PizzaOrderingModel;
@@ -20,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Scope("prototype")
 @Component
-public class StatusOrderAssembler extends RepresentationModelAssemblerSupport<Map<Pizza, String>, StatusOrderModel> {
+public class OrderStatusAssembler extends RepresentationModelAssemblerSupport<Map<Pizza, String>, StatusOrderModel> {
 
-    public StatusOrderAssembler() {
-        super(StatusOrderController.class, StatusOrderModel.class);
+    public OrderStatusAssembler() {
+        super(OrderController.class, StatusOrderModel.class);
     }
 
     @Override

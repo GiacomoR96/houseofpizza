@@ -24,7 +24,7 @@ import com.houseofpizza.repository.PizzaToOrderRepository;
 import com.houseofpizza.repository.StatusRepository;
 
 @ExtendWith(MockitoExtension.class)
-class StatusOrderServiceTest {
+class OrderStatusServiceTest {
 
     private Pizza pizza;
 
@@ -38,7 +38,7 @@ class StatusOrderServiceTest {
     private StatusRepository statusRepository;
 
     @InjectMocks
-    private StatusOrderService service;
+    private OrderStatusService service;
 
     @BeforeEach
     void setUp() {

@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class StatusOrderService {
+public class OrderStatusService {
 
     @Autowired
     private PizzaToOrderRepository pizzaToOrderRepository;

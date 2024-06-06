@@ -20,7 +20,7 @@ import com.houseofpizza.repository.PizzaToOrderRepository;
 import com.houseofpizza.repository.StatusRepository;
 
 @ExtendWith(MockitoExtension.class)
-class OrderProcessingServiceTest {
+class OrderProcessServiceTest {
 
     @Mock
     private PizzaToOrderRepository pizzaToOrderRepository;
@@ -29,7 +29,7 @@ class OrderProcessingServiceTest {
     private StatusRepository statusRepository;
 
     @InjectMocks
-    private OrderProcessingService service;
+    private OrderProcessService service;
 
     @Test
     void getStatusOrderService() throws InterruptedException {

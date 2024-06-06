@@ -15,13 +15,13 @@ import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.StatusOrderModel;
 
 @ExtendWith(MockitoExtension.class)
-class StatusOrderAssemblerTest {
+class OrderStatusAssemblerTest {
 
     @InjectMocks
-    private StatusOrderAssembler assembler;
+    private OrderStatusAssembler assembler;
 
     @Test
-    void populateStatusOrderModelTest() {
+    void assemblerToModelTest() {
         StatusOrderModel resource = assembler.toModel(mockPizzaMap());
         assertNotNull(resource);
         assertNotNull(resource.getPizzaOrderingModel());
