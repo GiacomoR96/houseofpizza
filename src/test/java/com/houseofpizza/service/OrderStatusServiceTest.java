@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.PizzaToOrder;
 import com.houseofpizza.model.Status;
@@ -60,10 +61,10 @@ class OrderStatusServiceTest {
             .when(statusRepository)
             .findAll(any(Specification.class));
 
-        Map<Pizza, String> map = service.getStatusOrderService(100L);
+        Map<Pizza, StatusEnum> map = service.getStatusOrderService(100L);
         Assertions.assertNotNull(map);
         Assertions.assertTrue(map.containsKey(pizza));
-        Assertions.assertTrue(map.containsValue("In queue"));
+        Assertions.assertTrue(map.containsValue(StatusEnum.QUEUE));
     }
 
     private PizzaToOrder getMockPizzaToOrderEntity() {
@@ -89,7 +90,7 @@ class OrderStatusServiceTest {
     private Status getMockStatusEntity() {
         Status entity = new Status();
         entity.setId(1L);
-        entity.setStatus("In queue");
+        entity.setStatus(StatusEnum.QUEUE);
         return entity;
     }
 

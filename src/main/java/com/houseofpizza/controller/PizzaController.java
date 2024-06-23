@@ -34,7 +34,8 @@ public class PizzaController {
     @GetMapping(value = "/products")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<CollectionModel<ProductsModel>> getProducts() {
         List<Pizza> output = pizzaService.findAllPizza();
         return ok(pizzaProductAssembler.toCollectionModel(output));

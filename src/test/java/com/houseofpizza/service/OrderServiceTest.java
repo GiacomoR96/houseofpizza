@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.Status;
@@ -92,7 +93,7 @@ class OrderServiceTest {
     private Status getMockStatusEntity() {
         Status entity = new Status();
         entity.setId(1L);
-        entity.setStatus("In queue");
+        entity.setStatus(StatusEnum.QUEUE);
         return entity;
     }
 

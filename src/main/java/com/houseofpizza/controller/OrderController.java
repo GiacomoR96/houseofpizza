@@ -10,6 +10,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.OrderAssembler;
+import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.OrderStatusAssembler;
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.OrderProcessingModel;
@@ -56,31 +58,45 @@ public class OrderController {
     @PostMapping(value = "/creation")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
         Long output = orderService.orderCreation(dto);
         return ok(orderAssembler.toModel(output));
     }
 
-    @GetMapping(value = "/status/{orderNumber}")
+    @GetMapping(value = "/status/{order}")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
     public ResponseEntity<StatusOrderModel> getOrderStatus(
-        @PathVariable(name = "orderNumber") final Long orderNumber) throws ErrorException {
-        Map<Pizza, String> output = orderStatusService.getStatusOrderService(orderNumber);
+        @PathVariable(name = "order") final Long order) throws ErrorException {
+        Map<Pizza, StatusEnum> output = orderStatusService.getStatusOrderService(order);
         return ok(orderStatusAssembler.toModel(output));
     }
 
     @PostMapping(value = "/process")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
     public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess()
         throws ErrorException, InterruptedException {
         List<Long> output = orderProcessService.getOrderProcessing();
         return ok(orderProcessAssembler.toCollectionModel(output));
+    }
+
+    @DeleteMapping(value = "/delete/{order}")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
+    public ResponseEntity<StatusOrderModel> deleteOrder(@PathVariable(name = "order") final Long order)
+        throws ErrorException {
+
+        // TODO : [WIP] Adding delete logic after updating db structure
+        return null;
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import com.houseofpizza.controller.OrderController;
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.PizzaOrderingModel;
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Scope("prototype")
 @Component
-public class OrderStatusAssembler extends RepresentationModelAssemblerSupport<Map<Pizza, String>, StatusOrderModel> {
+public class OrderStatusAssembler extends RepresentationModelAssemblerSupport<Map<Pizza, StatusEnum>, StatusOrderModel> {
 
     public OrderStatusAssembler() {
         super(OrderController.class, StatusOrderModel.class);
@@ -28,13 +29,13 @@ public class OrderStatusAssembler extends RepresentationModelAssemblerSupport<Ma
 
     @Override
     @NonNull
-    public StatusOrderModel toModel(@NonNull Map<Pizza, String> entity) {
+    public StatusOrderModel toModel(@NonNull Map<Pizza, StatusEnum> entity) {
         StatusOrderModel statusOrderModel = new StatusOrderModel();
         statusOrderModel.setPizzaOrderingModel(mapPizzaOrderingApiList(entity));
         return statusOrderModel;
     }
 
-    private List<PizzaOrderingModel> mapPizzaOrderingApiList(Map<Pizza, String> entityList) {
+    private List<PizzaOrderingModel> mapPizzaOrderingApiList(Map<Pizza, StatusEnum> entityList) {
         List<PizzaOrderingModel> list = new ArrayList<>();
         if (MapUtils.isNotEmpty(entityList)) {
             entityList.forEach((k, v) -> list.add(populatePizzaOrderingApi(k, v)));
@@ -42,11 +43,11 @@ public class OrderStatusAssembler extends RepresentationModelAssemblerSupport<Ma
         return list;
     }
 
-    private PizzaOrderingModel populatePizzaOrderingApi(Pizza element, String status) {
+    private PizzaOrderingModel populatePizzaOrderingApi(Pizza element, StatusEnum status) {
         PizzaOrderingModel api = new PizzaOrderingModel();
         api.setName(element.getName());
         api.setPrice(element.getPrice());
-        api.setStatus(status);
+        api.setStatus(status.getCode());
         return api;
     }
 
