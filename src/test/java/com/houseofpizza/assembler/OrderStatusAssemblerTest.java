@@ -11,26 +11,27 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.StatusOrderModel;
 
 @ExtendWith(MockitoExtension.class)
-class StatusOrderAssemblerTest {
+class OrderStatusAssemblerTest {
 
     @InjectMocks
-    private StatusOrderAssembler assembler;
+    private OrderStatusAssembler assembler;
 
     @Test
-    void populateStatusOrderModelTest() {
+    void assemblerToModelTest() {
         StatusOrderModel resource = assembler.toModel(mockPizzaMap());
         assertNotNull(resource);
         assertNotNull(resource.getPizzaOrderingModel());
         assertEquals(1, resource.getPizzaOrderingModel().size());
     }
 
-    private Map<Pizza, String> mockPizzaMap() {
-        Map<Pizza, String> map = new HashMap<>();
-        map.put(new Pizza(), "In queue");
+    private Map<Pizza, StatusEnum> mockPizzaMap() {
+        Map<Pizza, StatusEnum> map = new HashMap<>();
+        map.put(new Pizza(), StatusEnum.QUEUE);
         return map;
     }
 

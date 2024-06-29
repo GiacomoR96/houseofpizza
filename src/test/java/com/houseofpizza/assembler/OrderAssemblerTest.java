@@ -11,13 +11,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.houseofpizza.representation.OrderingModel;
 
 @ExtendWith(MockitoExtension.class)
-class OrderingAssemblerTest {
+class OrderAssemblerTest {
 
     @InjectMocks
-    private OrderingAssembler assembler;
+    private OrderAssembler assembler;
 
     @Test
-    void populateStatusOrderModelTest() {
+    void assemblerToModelTest() {
         OrderingModel resource = assembler.toModel(Long.MAX_VALUE);
         assertNotNull(resource);
         assertNotNull(resource.getOrderNumber());

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.PizzaToOrder;
@@ -24,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class OrderProcessingService {
+public class OrderProcessService {
 
     @Autowired
     private PizzaToOrderRepository pizzaToOrderRepository;
@@ -40,14 +41,14 @@ public class OrderProcessingService {
         for (Status element : statusList) {
             PizzaToOrder pizzaToOrder = retrievePizzaToOrderByIdStatus(element.getId());
 
-            element.setStatus("Processing");
+            element.setStatus(StatusEnum.PROCESSING);
             log.info("I process the order number: {} and pizzaId: {} and status: {}", pizzaToOrder.getIdOrder(),
                 pizzaToOrder.getIdPizza(), element.getStatus());
             statusRepository.saveAndFlush(element);
 
             TimeUnit.SECONDS.sleep(10);
 
-            element.setStatus("Completed");
+            element.setStatus(StatusEnum.COMPLETED);
             log.info("Finished processing for order: {} and pizzaId: {} and status: {}", pizzaToOrder.getIdOrder(),
                 pizzaToOrder.getIdPizza(), element.getStatus());
             statusRepository.saveAndFlush(element);

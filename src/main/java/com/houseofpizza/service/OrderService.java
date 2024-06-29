@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class OrderingService {
+public class OrderService {
 
     @Autowired
     private OrderRepository repository;
@@ -37,7 +37,7 @@ public class OrderingService {
     private PizzaToOrderService pizzaToOrderService;
 
     @Autowired
-    private StatusOrderService statusOrderService;
+    private OrderStatusService orderStatusService;
 
     // TODO: Add data control logic on id provided in input before saving to database
     public Long orderCreation(OrderingDto dto) throws ErrorException {
@@ -50,7 +50,7 @@ public class OrderingService {
         for (ProductDto productDto : productDtoList) {
             for (var i = 0; i < productDto.getQuantity(); i++) {
                 Pizza pizza = pizzaService.findPizzaByidPizza(productDto.getId());
-                Status status = statusOrderService.saveBaseStatusOrder();
+                Status status = orderStatusService.saveBaseStatusOrder();
                 pizzaToOrderService.saveBasePizzaToOrder(order.getId(), pizza.getId(), status.getId());
             }
         }

@@ -13,6 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.Pizza;
@@ -29,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class StatusOrderService {
+public class OrderStatusService {
 
     @Autowired
     private PizzaToOrderRepository pizzaToOrderRepository;
@@ -40,11 +41,11 @@ public class StatusOrderService {
     @Autowired
     private StatusRepository statusRepository;
 
-    public Map<Pizza, String> getStatusOrderService(Long orderNumber) throws ErrorException {
+    public Map<Pizza, StatusEnum> getStatusOrderService(Long order) throws ErrorException {
         log.info("Begin service method getStatusOrderService");
 
-        List<PizzaToOrder> pizzaToOrderList = retrievePizzaToOrderByOrderNumber(orderNumber);
-        Map<Pizza, String> pizzaList = retrievePizzaList(pizzaToOrderList);
+        List<PizzaToOrder> pizzaToOrderList = retrievePizzaToOrderByOrderNumber(order);
+        Map<Pizza, StatusEnum> pizzaList = retrievePizzaList(pizzaToOrderList);
 
         log.info("Service list output : {}", pizzaList);
         log.info("End service method getStatusOrderService");
@@ -69,8 +70,8 @@ public class StatusOrderService {
     }
 
     // TODO: THERE IS A PROBLEM HERE
-    private Map<Pizza, String> retrievePizzaList(List<PizzaToOrder> pizzaToOrderList) {
-        Map<Pizza, String> map = new HashMap<>();
+    private Map<Pizza, StatusEnum> retrievePizzaList(List<PizzaToOrder> pizzaToOrderList) {
+        Map<Pizza, StatusEnum> map = new HashMap<>();
 
         for (PizzaToOrder pizzaOrder : pizzaToOrderList) {
             Pizza pizza = retrievePizzaByIdPizza(pizzaOrder.getIdPizza());

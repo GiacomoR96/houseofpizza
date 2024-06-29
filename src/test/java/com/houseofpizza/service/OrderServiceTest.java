@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.Status;
@@ -24,7 +25,7 @@ import com.houseofpizza.representation.dto.OrderingDto;
 import com.houseofpizza.representation.dto.ProductDto;
 
 @ExtendWith(MockitoExtension.class)
-class OrderingServiceTest {
+class OrderServiceTest {
 
     @Mock
     private PizzaToOrderService pizzaToOrderService;
@@ -33,13 +34,13 @@ class OrderingServiceTest {
     private PizzaService pizzaService;
 
     @Mock
-    private StatusOrderService statusOrderService;
+    private OrderStatusService orderStatusService;
 
     @Mock
     private OrderRepository orderRepository;
 
     @InjectMocks
-    private OrderingService service;
+    private OrderService service;
 
     @Test
     void getStatusOrderService() {
@@ -48,7 +49,7 @@ class OrderingServiceTest {
             .findAll(any(Specification.class));
 
         when(pizzaService.findPizzaByidPizza(anyLong())).thenReturn(getMockPizzaEntity());
-        when(statusOrderService.saveBaseStatusOrder()).thenReturn(getMockStatusEntity());
+        when(orderStatusService.saveBaseStatusOrder()).thenReturn(getMockStatusEntity());
 
 
         Long result = service.orderCreation(getMockPizzaOrderingDto());
@@ -92,7 +93,7 @@ class OrderingServiceTest {
     private Status getMockStatusEntity() {
         Status entity = new Status();
         entity.setId(1L);
-        entity.setStatus("In queue");
+        entity.setStatus(StatusEnum.QUEUE);
         return entity;
     }
 

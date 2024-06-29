@@ -9,10 +9,14 @@ import lombok.experimental.FieldNameConstants;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import com.houseofpizza.enums.StatusEnum;
 
 @Entity
 @Table(name = "status")
@@ -27,7 +31,8 @@ public class Status implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private StatusEnum status;
 
 }
