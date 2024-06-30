@@ -18,6 +18,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: margherita.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -33,6 +42,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: capricciosa.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -48,6 +66,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: salsiccia_friarielli.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -63,6 +90,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: biancaneve.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -78,6 +114,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: diavola.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -93,6 +138,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: quattro_stagioni.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -108,6 +162,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: marinara.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -123,6 +186,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: parmigiana.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -138,6 +210,15 @@ databaseChangeLog:
               - column:
                   name: image
                   value: vegetariana.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
         - insert:
             tableName: pizza
             columns:
@@ -153,3 +234,12 @@ databaseChangeLog:
               - column:
                   name: image
                   value: porcina.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1

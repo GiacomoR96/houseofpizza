@@ -1,0 +1,100 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1719740976288-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  autoIncrement: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  name: pizza_id
+                  type: BIGINT
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: version
+                  type: BIGINT
+            tableName: pizza_to_order
+  - changeSet:
+      id: 1719740976288-2
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: created_at
+            tableName: pizza_to_order
+  - changeSet:
+      id: 1719740976288-3
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: updated_at
+            tableName: pizza_to_order
+  - changeSet:
+      id: 1719740976288-4
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: version
+            tableName: pizza_to_order
+  - changeSet:
+      id: 1719740976288-5
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: order_id
+            baseTableName: pizza_to_order
+            constraintName: FK_PIZZA_TO_ORDER_ON_ORDER
+            referencedColumnNames: id
+            referencedTableName: order
+  - changeSet:
+      id: 1719740976288-6
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: pizza_id
+            baseTableName: pizza_to_order
+            constraintName: FK_PIZZA_TO_ORDER_ON_PIZZA
+            referencedColumnNames: id
+            referencedTableName: pizza
+  - changeSet:
+      id: 1719740976288-7
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: id_order
+            tableName: pizza_to_order
+        - dropColumn:
+            columnName: id_pizza
+            tableName: pizza_to_order
+        - dropColumn:
+            columnName: id_status
+            tableName: pizza_to_order
+  - changeSet:
+      id: 1719740976288-8
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: pk_pizza_to_order
+            tableName: pizza_to_order

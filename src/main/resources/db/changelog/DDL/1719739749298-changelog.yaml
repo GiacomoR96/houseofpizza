@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1719739749298-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - modifyDataType:
+            columnName: image
+            newDataType: VARCHAR(255)
+            tableName: pizza
+  - changeSet:
+      id: 1719739749298-2
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: version
+                  type: BIGINT
+            tableName: pizza
+  - changeSet:
+      id: 1719739749298-3
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: created_at
+            tableName: pizza
+  - changeSet:
+      id: 1719739749298-4
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: updated_at
+            tableName: pizza
+  - changeSet:
+      id: 1719739749298-5
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: version
+            tableName: pizza
+  - changeSet:
+      id: 1719739749298-6
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropTable:
+            cascadeConstraints: true
+            tableName: status

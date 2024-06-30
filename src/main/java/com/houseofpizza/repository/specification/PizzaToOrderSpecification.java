@@ -9,14 +9,14 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PizzaToOrderSpecification {
 
-    public Specification<PizzaToOrder> withIdOrderEqualTo(final Long orderNumber) {
-        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-            .equal(root.get(PizzaToOrder.Fields.idOrder), orderNumber));
-    }
+//    public Specification<PizzaToOrder> withIdOrderEqualTo(final Long orderNumber) {
+//        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
+//            .equal(root.get(PizzaToOrder.Fields.idOrder), orderNumber));
+//    }
 
-    public Specification<PizzaToOrder> withIdStatusEqualTo(final Long idStatus) {
-        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-            .equal(root.get(PizzaToOrder.Fields.idStatus), idStatus));
-    }
+//    public Specification<PizzaToOrder> withIdStatusEqualTo(final Long idStatus) {
+//        return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
+//            .equal(root.get(PizzaToOrder.Fields.idStatus), idStatus));
+//    }
 
 }

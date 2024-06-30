@@ -10,4 +10,3 @@ databaseChangeLog:
                   name: image
                   type: VARCHAR(55)
             tableName: pizza
-
