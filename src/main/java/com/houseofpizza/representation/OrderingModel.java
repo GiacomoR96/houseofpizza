@@ -1,14 +1,15 @@
 package com.houseofpizza.representation;
 
-import org.springframework.hateoas.RepresentationModel;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderingModel extends RepresentationModel<OrderingModel> {
+public class OrderingModel extends BaseRepresentationModel<Long, OrderingModel> {
 
-    private Long orderNumber;
+    private Long order; // TODO: uguale all'id... da mantenere?
+    private LocalDate date;
 
 }

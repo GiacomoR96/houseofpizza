@@ -2,16 +2,11 @@ package com.houseofpizza.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.houseofpizza.assembler.OrderAssembler;
 import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.OrderStatusAssembler;
-import com.houseofpizza.enums.StatusEnum;
 import com.houseofpizza.exceptions.ErrorException;
-import com.houseofpizza.model.Pizza;
-import com.houseofpizza.representation.OrderProcessingModel;
+import com.houseofpizza.model.Order;
 import com.houseofpizza.representation.OrderingModel;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.OrderingDto;
@@ -55,16 +48,15 @@ public class OrderController {
     @Autowired
     private OrderProcessAssembler orderProcessAssembler;
 
-//    TODO : TEMPORARY API DISABLING
-//    @PostMapping(value = "/creation")
-//    @ApiResponses(value = {
-//        @ApiResponse(responseCode = "200", description = "OK"),
-//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-//    })
-//    public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
-//        Long output = orderService.orderCreation(dto);
-//        return ok(orderAssembler.toModel(output));
-//    }
+    @PostMapping(value = "/creation")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
+    public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
+        Order output = orderService.createAndSaveOrder(dto);
+        return ok(orderAssembler.toModel(output));
+    }
 
 //    TODO : TEMPORARY API DISABLING
 //    @GetMapping(value = "/status/{order}")

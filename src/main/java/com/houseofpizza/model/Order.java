@@ -28,7 +28,7 @@ import jakarta.persistence.Table;
 @Setter
 @NoArgsConstructor
 @FieldNameConstants
-public class Order extends BaseEntity {
+public class Order extends AuditableVersionedEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

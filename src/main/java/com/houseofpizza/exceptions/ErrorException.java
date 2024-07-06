@@ -2,6 +2,7 @@ package com.houseofpizza.exceptions;
 
 import static com.houseofpizza.exceptions.ErrorCodes.generateErrorException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +12,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class ErrorException extends ResponseStatusException {
 
+    private final Enum<?> errorEnum;
+
     public ErrorException(HttpStatus status, String message) {
         super(status, message);
+        this.errorEnum = null;
+    }
+
+    public ErrorException(HttpStatus status, Enum<?> errorEnum) {
+        super(status, errorEnum.name());
+        this.errorEnum = errorEnum;
     }
 
     public static <T> List<T> checkNotEmptyListOrThrowNotFound(List<T> queryResults, ErrorCodes error)

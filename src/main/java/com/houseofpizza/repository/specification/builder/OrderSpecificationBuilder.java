@@ -10,8 +10,9 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class OrderSpecificationBuilder {
 
-    public Specification<Order> withPersonNameEqualTo(String personName) {
-        return Specification.where(OrderSpecification.withPersonNameEqualTo(personName));
+    public Specification<Order> withPersonNameEqualToAndOrderActive(String personName) {
+        return Specification.where(OrderSpecification.withPersonNameEqualTo(personName))
+            .and(OrderSpecification.withOrderActive());
     }
 
 }
