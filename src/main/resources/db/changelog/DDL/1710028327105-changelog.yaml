@@ -94,4 +94,3 @@ databaseChangeLog:
                   name: price
                   type: DOUBLE
             tableName: t_pizza
-

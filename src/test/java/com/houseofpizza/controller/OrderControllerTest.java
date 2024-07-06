@@ -50,42 +50,42 @@ class OrderControllerTest {
     @InjectMocks
     private OrderController controller;
 
-    @Test
-    void getStatusMyOrder() {
-        when(orderAssembler.toModel(any())).thenReturn(new OrderingModel());
-        given(orderService.orderCreation(any())).willReturn(null);
+//    @Test
+//    void getStatusMyOrder() {
+//        when(orderAssembler.toModel(any())).thenReturn(new OrderingModel());
+//        given(orderService.orderCreation(any())).willReturn(null);
+//
+//        ResponseEntity<OrderingModel> response = controller.orderCreation(new OrderingDto());
+//        assertNotNull(response);
+//        OrderingModel body = response.getBody();
+//        assertNotNull(body);
+//        assertNull(body.getOrderNumber());
+//    }
 
-        ResponseEntity<OrderingModel> response = controller.orderCreation(new OrderingDto());
-        assertNotNull(response);
-        OrderingModel body = response.getBody();
-        assertNotNull(body);
-        assertNull(body.getOrderNumber());
-    }
+//    @Test
+//    void getOrderStatusTest() {
+//        when(orderStatusAssembler.toModel(any())).thenReturn(mockStatusOrderModel());
+//        given(orderStatusService.getStatusOrderService(any())).willReturn(new HashMap<>());
+//
+//        ResponseEntity<StatusOrderModel> response = controller.getOrderStatus(Long.MIN_VALUE);
+//        assertNotNull(response);
+//        StatusOrderModel body = response.getBody();
+//        assertNotNull(body);
+//        assertEquals(1, body.getPizzaOrderingModel().size());
+//    }
 
-    @Test
-    void getOrderStatusTest() {
-        when(orderStatusAssembler.toModel(any())).thenReturn(mockStatusOrderModel());
-        given(orderStatusService.getStatusOrderService(any())).willReturn(new HashMap<>());
-
-        ResponseEntity<StatusOrderModel> response = controller.getOrderStatus(Long.MIN_VALUE);
-        assertNotNull(response);
-        StatusOrderModel body = response.getBody();
-        assertNotNull(body);
-        assertEquals(1, body.getPizzaOrderingModel().size());
-    }
-
-    @Test
-    void orderProcessTest() throws InterruptedException {
-        when(orderProcessService.getOrderProcessing()).thenReturn(Collections.singletonList(1L));
-        when(orderProcessAssembler.toCollectionModel(any())).thenReturn(mockCollectionOrderProcessingModel());
-
-        ResponseEntity<CollectionModel<OrderProcessingModel>> response = controller.orderProcess();
-        assertNotNull(response);
-        CollectionModel<OrderProcessingModel> collectionModel = response.getBody();
-        assertNotNull(collectionModel);
-        assertNotNull(collectionModel.getContent());
-        assertEquals(1, collectionModel.getContent().size());
-    }
+//    @Test
+//    void orderProcessTest() throws InterruptedException {
+//        when(orderProcessService.getOrderProcessing()).thenReturn(Collections.singletonList(1L));
+//        when(orderProcessAssembler.toCollectionModel(any())).thenReturn(mockCollectionOrderProcessingModel());
+//
+//        ResponseEntity<CollectionModel<OrderProcessingModel>> response = controller.orderProcess();
+//        assertNotNull(response);
+//        CollectionModel<OrderProcessingModel> collectionModel = response.getBody();
+//        assertNotNull(collectionModel);
+//        assertNotNull(collectionModel.getContent());
+//        assertEquals(1, collectionModel.getContent().size());
+//    }
 
     private StatusOrderModel mockStatusOrderModel() {
         StatusOrderModel model = new StatusOrderModel();

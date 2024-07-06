@@ -55,37 +55,40 @@ public class OrderController {
     @Autowired
     private OrderProcessAssembler orderProcessAssembler;
 
-    @PostMapping(value = "/creation")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    })
-    public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
-        Long output = orderService.orderCreation(dto);
-        return ok(orderAssembler.toModel(output));
-    }
+//    TODO : TEMPORARY API DISABLING
+//    @PostMapping(value = "/creation")
+//    @ApiResponses(value = {
+//        @ApiResponse(responseCode = "200", description = "OK"),
+//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+//    })
+//    public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
+//        Long output = orderService.orderCreation(dto);
+//        return ok(orderAssembler.toModel(output));
+//    }
 
-    @GetMapping(value = "/status/{order}")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    })
-    public ResponseEntity<StatusOrderModel> getOrderStatus(
-        @PathVariable(name = "order") final Long order) throws ErrorException {
-        Map<Pizza, StatusEnum> output = orderStatusService.getStatusOrderService(order);
-        return ok(orderStatusAssembler.toModel(output));
-    }
+//    TODO : TEMPORARY API DISABLING
+//    @GetMapping(value = "/status/{order}")
+//    @ApiResponses(value = {
+//        @ApiResponse(responseCode = "200", description = "OK"),
+//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+//    })
+//    public ResponseEntity<StatusOrderModel> getOrderStatus(
+//        @PathVariable(name = "order") final Long order) throws ErrorException {
+//        Map<Pizza, StatusEnum> output = orderStatusService.getStatusOrderService(order);
+//        return ok(orderStatusAssembler.toModel(output));
+//    }
 
-    @PostMapping(value = "/process")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    })
-    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess()
-        throws ErrorException, InterruptedException {
-        List<Long> output = orderProcessService.getOrderProcessing();
-        return ok(orderProcessAssembler.toCollectionModel(output));
-    }
+//    TODO : TEMPORARY API DISABLING
+//    @PostMapping(value = "/process")
+//    @ApiResponses(value = {
+//        @ApiResponse(responseCode = "200", description = "OK"),
+//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+//    })
+//    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess()
+//        throws ErrorException, InterruptedException {
+//        List<Long> output = orderProcessService.getOrderProcessing();
+//        return ok(orderProcessAssembler.toCollectionModel(output));
+//    }
 
     @DeleteMapping(value = "/delete/{order}")
     @ApiResponses(value = {
