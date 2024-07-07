@@ -38,7 +38,7 @@ class PizzaControllerTest {
     @Test
     void getProductsTest() {
         when(pizzaProductAssembler.toCollectionModel(any())).thenReturn(mockCollectionProductsModel());
-        given(pizzaService.findAllPizza()).willReturn(populatePizza());
+        given(pizzaService.findAll()).willReturn(populatePizza());
 
         ResponseEntity<CollectionModel<ProductsModel>> response = controller.getProducts();
         assertNotNull(response);

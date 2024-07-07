@@ -6,8 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum LifecycleEnum {
-    DRAFT("Draft"),
-    READY("Ready"),
+    ACTIVE("Active"),
     DELETED("Deleted");
 
     private final String code;

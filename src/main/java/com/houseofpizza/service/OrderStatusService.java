@@ -42,10 +42,10 @@ public class OrderStatusService {
 //            ErrorCodes.ORDER_NOT_FOUND);
 //    }
 
-    private Pizza retrievePizzaByIdPizza(Long idPizza) {
-        Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withIdPizzaEqualTo(idPizza);
-        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.PIZZA_NOT_FOUND);
-    }
+//    private Pizza retrievePizzaByIdPizza(Long idPizza) {
+//        Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withIdPizzaEqualTo(idPizza);
+//        return extractFirstOrThrowNotFound(pizzaRepository.findAll(pizzaSpecification), ErrorCodes.PIZZA_NOT_FOUND);
+//    }
 
 //    private Status retrieveStatusByStatusId(Long statusId) {
 //        Specification<Status> pizzaSpecification = StatusSpecificationBuilder.withStatusIdEqualTo(statusId);

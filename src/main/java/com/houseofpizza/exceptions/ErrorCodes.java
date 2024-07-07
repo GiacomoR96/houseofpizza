@@ -7,10 +7,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorCodes {
 
-    LIST_NOT_FOUND("Error: Empty list"),
-    PIZZA_NOT_FOUND("Error: Pizza not found"),
-    ORDER_NOT_FOUND("Error: Order not found"),
-    STATUS_NOT_FOUND("Error: Status of pizza not found"),
+    NOT_FOUND("Error: Entity not found."),
     ELEMENTS_TO_ELABORATE_NOT_FOUND("Error: No pizza to produce identified");
 
     private final String message;
@@ -19,8 +16,19 @@ public enum ErrorCodes {
         this.message = message;
     }
 
-    public static ErrorException generateErrorException(HttpStatus status, ErrorCodes errorCodes) {
-        return new ErrorException(status, errorCodes.getMessage());
+    public static ErrorException generateErrorException(HttpStatus status, Enum<?> errorEnum) {
+        return new ErrorException(status, errorEnum);
+    }
+
+    /**
+     * Generate exception for notFound error - 404 HttpStatus
+     * Use for not found path variables in urls/params.
+     *
+     * @param errorEnum enum
+     * @return ErrorException
+     */
+    public static ErrorException generateError404(Enum<?> errorEnum) {
+        return new ErrorException(HttpStatus.NOT_FOUND, errorEnum);
     }
 
 }

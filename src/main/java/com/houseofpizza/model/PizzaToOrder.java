@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 @Setter
 @NoArgsConstructor
 @FieldNameConstants
-public class PizzaToOrder extends BaseEntity {
+public class PizzaToOrder extends AuditableVersionedEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

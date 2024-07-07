@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional(readOnly = true)
-public interface PizzaRepository extends JpaRepository<Pizza, Integer>, JpaSpecificationExecutor<Pizza> {
+public interface PizzaRepository extends BaseRepository<Pizza, Long> {
 
 }
