@@ -4,28 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 
-import java.util.Collections;
-import java.util.HashMap;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.ResponseEntity;
 
 import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.OrderAssembler;
-import com.houseofpizza.assembler.OrderStatusAssembler;
-import com.houseofpizza.representation.OrderProcessingModel;
-import com.houseofpizza.representation.OrderingModel;
-import com.houseofpizza.representation.StatusOrderModel;
-import com.houseofpizza.representation.dto.OrderingDto;
-import com.houseofpizza.representation.dto.PizzaOrderingModel;
+import com.houseofpizza.assembler.StatusOrderAssembler;
 import com.houseofpizza.service.OrderProcessService;
 import com.houseofpizza.service.OrderService;
 import com.houseofpizza.service.OrderStatusService;
@@ -41,7 +28,7 @@ class OrderControllerTest {
     private OrderService orderService;
 
     @Mock
-    private OrderStatusAssembler orderStatusAssembler;
+    private StatusOrderAssembler statusOrderAssembler;
     @Mock
     private OrderProcessAssembler orderProcessAssembler;
     @Mock
@@ -71,7 +58,7 @@ class OrderControllerTest {
 //        assertNotNull(response);
 //        StatusOrderModel body = response.getBody();
 //        assertNotNull(body);
-//        assertEquals(1, body.getPizzaOrderingModel().size());
+//        assertEquals(1, body.getPizzaToOrderModel().size());
 //    }
 
 //    @Test
@@ -87,29 +74,29 @@ class OrderControllerTest {
 //        assertEquals(1, collectionModel.getContent().size());
 //    }
 
-    private StatusOrderModel mockStatusOrderModel() {
-        StatusOrderModel model = new StatusOrderModel();
-        model.setPizzaOrderingModel(Collections.singletonList(mockPizzaOrderingModel()));
-        return model;
-    }
+//    private StatusOrderModel mockStatusOrderModel() {
+//        StatusOrderModel model = new StatusOrderModel();
+//        model.setPizzaToOrderModel(Collections.singletonList(mockPizzaOrderingModel()));
+//        return model;
+//    }
 
-    private PizzaOrderingModel mockPizzaOrderingModel() {
-        PizzaOrderingModel model = new PizzaOrderingModel();
-        model.setName("Carbonara");
-        model.setPrice(6.0);
-        model.setStatus("In queue");
-        return model;
-    }
+//    private StatusOrderModel mockPizzaOrderingModel() {
+//        StatusOrderModel model = new StatusOrderModel();
+//        model.setName("Carbonara");
+//        model.setPrice(6.0);
+//        model.setStatus("In queue");
+//        return model;
+//    }
 
-    private CollectionModel<OrderProcessingModel> mockCollectionOrderProcessingModel() {
-        return CollectionModel.of(
-            Collections.singletonList(mockOrderProcessingModel()));
-    }
+//    private CollectionModel<OrderProcessingModel> mockCollectionOrderProcessingModel() {
+//        return CollectionModel.of(
+//            Collections.singletonList(mockOrderProcessingModel()));
+//    }
 
-    private OrderProcessingModel mockOrderProcessingModel() {
-        OrderProcessingModel orderProcessingModel = new OrderProcessingModel();
-        orderProcessingModel.setOrderNumber(Long.MIN_VALUE);
-        return orderProcessingModel;
-    }
+//    private OrderProcessingModel mockOrderProcessingModel() {
+//        OrderProcessingModel orderProcessingModel = new OrderProcessingModel();
+//        orderProcessingModel.setOrderNumber(Long.MIN_VALUE);
+//        return orderProcessingModel;
+//    }
 
 }
