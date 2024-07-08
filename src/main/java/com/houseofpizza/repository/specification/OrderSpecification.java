@@ -12,7 +12,7 @@ public class OrderSpecification {
 
     public Specification<Order> withPersonNameEqualTo(final String personName) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-            .equal(root.get(Order.Fields.personName), personName));
+            .equal(root.get(Order.Fields.email), personName));
     }
 
     public Specification<Order> withOrderActive() {

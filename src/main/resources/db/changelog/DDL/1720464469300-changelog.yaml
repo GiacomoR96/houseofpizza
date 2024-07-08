@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1720464469300-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - renameColumn:
+            columnDataType: VARCHAR(255)
+            newColumnName: email
+            oldColumnName: person_name
+            tableName: order
+  - changeSet:
+      id: 1720464469300-2
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: date
+            tableName: order

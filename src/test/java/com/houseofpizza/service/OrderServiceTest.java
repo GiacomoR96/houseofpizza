@@ -50,7 +50,7 @@ class OrderServiceTest {
     private OrderingDto getMockPizzaOrderingDto() {
         OrderingDto dto = new OrderingDto();
         dto.setProducts(getMockProductDto());
-        dto.setPersonName("Test");
+        dto.setEmail("Test");
         return dto;
     }
 

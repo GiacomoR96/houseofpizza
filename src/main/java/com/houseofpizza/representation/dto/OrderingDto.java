@@ -6,7 +6,6 @@ import lombok.Data;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 @Data
 public class OrderingDto {
@@ -15,7 +14,6 @@ public class OrderingDto {
     @NotEmpty
     private List<@Valid ProductDto> products;
 
-    @NotNull
-    private String personName;
+    private String email;
 
 }
