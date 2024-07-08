@@ -7,6 +7,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +63,7 @@ public class OrderController {
     })
     public ResponseEntity<CollectionModel<StatusOrderModel>> getStatusOrder(
         @PathVariable(name = "order") final Long order) {
-        Order result = orderService.findOneOrError404(order);
+        Order result = orderService.getStatusOrder(order);
         return ok(statusOrderAssembler.toCollectionModel(result.getPizzaToOrders()));
     }
 
@@ -78,16 +79,14 @@ public class OrderController {
 //        return ok(orderProcessAssembler.toCollectionModel(output));
 //    }
 
-//    @DeleteMapping(value = "/delete/{order}")
-//    @ApiResponses(value = {
-//        @ApiResponse(responseCode = "200", description = "OK"),
-//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-//    })
-//    public ResponseEntity<StatusOrderModel> deleteOrder(@PathVariable(name = "order") final Long order)
-//        throws ErrorException {
-//
-//        // TODO : [WIP] Adding delete logic after updating db structure
-//        return null;
-//    }
+    @DeleteMapping(value = "/delete/{order}")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    })
+    public ResponseEntity<StatusOrderModel> deleteOrder(@PathVariable(name = "order") final Long order) {
+        orderService.deleteOrder(order);
+        return ResponseEntity.noContent().build();
+    }
 
 }

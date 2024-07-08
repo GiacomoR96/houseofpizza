@@ -13,7 +13,7 @@ public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    Order toEntity(String personName);
+    Order toEntity(String email);
 
     @Mapping(ignore = true, target = "id")
     @Mapping(source = "id", target = "order")

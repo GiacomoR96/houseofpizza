@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.houseofpizza.enums.LifecycleEnum;
+import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.PizzaToOrder;
@@ -55,6 +56,21 @@ public class OrderService extends BaseService<OrderRepository, Order, Long> {
         log.info("Service orderId output : {}", order);
         log.info("End service method orderCreation");
         return order;
+    }
+
+    public Order getStatusOrder(Long id) {
+        Order order = findOneOrError404(id);
+        if (order.getLifecycle() == LifecycleEnum.DELETED) {
+            throw ErrorCodes.generateError404(ErrorCodes.NOT_FOUND);
+        }
+        return order;
+    }
+
+    @Transactional
+    public void deleteOrder(Long id) {
+        Order order = findOneOrError404(id);
+        order.setLifecycle(LifecycleEnum.DELETED);
+        save(order);
     }
 
     private Order retrieveOrBuildOrder(String email) {
