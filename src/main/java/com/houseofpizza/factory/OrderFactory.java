@@ -6,8 +6,8 @@ import com.houseofpizza.model.Order;
 
 public class OrderFactory {
 
-    public static Order buildBaseOrder(String personName) {
-        Order entity = OrderMapper.INSTANCE.toEntity(personName);
+    public static Order buildBaseOrder(String email) {
+        Order entity = OrderMapper.INSTANCE.toEntity(email);
         entity.setLifecycle(LifecycleEnum.ACTIVE);
         return entity;
     }

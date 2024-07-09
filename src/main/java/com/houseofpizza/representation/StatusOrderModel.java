@@ -1,9 +1,5 @@
 package com.houseofpizza.representation;
 
-import com.houseofpizza.representation.BaseRepresentationModel;
-import com.houseofpizza.representation.OrderingModel;
-import com.houseofpizza.representation.ProductsModel;
-
 import lombok.Getter;
 import lombok.Setter;
 

@@ -5,13 +5,15 @@ import static com.houseofpizza.factory.PizzaToOrderFactory.buildBasePizzaToOrder
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.houseofpizza.enums.LifecycleEnum;
+import com.houseofpizza.exceptions.ErrorCodes;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.model.PizzaToOrder;
@@ -34,10 +36,11 @@ public class OrderService extends BaseService<OrderRepository, Order, Long> {
         super(repository);
     }
 
+    @Transactional
     public Order createAndSaveOrder(OrderingDto dto) {
         log.info("Begin service method orderCreation");
 
-        Order order = retrieveOrBuildOrder(dto.getPersonName());
+        Order order = retrieveOrBuildOrder(dto.getEmail());
         List<PizzaToOrder> list = new ArrayList<>();
 
         for (ProductDto product : dto.getProducts()) {
@@ -55,15 +58,30 @@ public class OrderService extends BaseService<OrderRepository, Order, Long> {
         return order;
     }
 
-    private Order retrieveOrBuildOrder(String personName) {
-        Specification<Order> orderSpecification =
-            OrderSpecificationBuilder.withPersonNameEqualToAndOrderActive(personName);
-
-        Optional<Order> entity = repository.findOne(orderSpecification);
-        if(entity.isPresent()) {
-            return entity.get();
+    public Order getStatusOrder(Long id) {
+        Order order = findOneOrError404(id);
+        if (order.getLifecycle() == LifecycleEnum.DELETED) {
+            throw ErrorCodes.generateError404(ErrorCodes.NOT_FOUND);
         }
-        return buildBaseOrder(personName);
+        return order;
+    }
+
+    @Transactional
+    public void deleteOrder(Long id) {
+        Order order = findOneOrError404(id);
+        order.setLifecycle(LifecycleEnum.DELETED);
+        save(order);
+    }
+
+    private Order retrieveOrBuildOrder(String email) {
+        if (StringUtils.isBlank(email)) {
+            return buildBaseOrder(email);
+        }
+        Specification<Order> orderSpecification =
+            OrderSpecificationBuilder.withPersonNameEqualToAndOrderActive(email);
+
+        return repository.findOne(orderSpecification)
+            .orElseGet(() -> buildBaseOrder(email));
     }
 
 }

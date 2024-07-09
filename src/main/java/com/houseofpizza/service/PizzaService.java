@@ -15,10 +15,4 @@ public class PizzaService extends BaseService<PizzaRepository, Pizza, Long> {
         super(repository);
     }
 
-//    public Pizza findPizzaByidPizza(Long id) {
-//        Specification<Pizza> pizzaSpecification = PizzaSpecificationBuilder.withIdPizzaEqualTo(id);
-//        return repository.findOne(pizzaSpecification)
-//            .orElseThrow(() -> generateException(ErrorCodes.PIZZA_NOT_FOUND));
-//    }
-
 }

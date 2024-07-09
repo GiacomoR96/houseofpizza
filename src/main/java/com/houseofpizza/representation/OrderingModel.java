@@ -2,6 +2,8 @@ package com.houseofpizza.representation;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +11,9 @@ import lombok.Setter;
 @Setter
 public class OrderingModel extends BaseRepresentationModel<Long, OrderingModel> {
 
-    private Long order; // TODO: uguale all'id... da mantenere?
+    private Long order;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
 }

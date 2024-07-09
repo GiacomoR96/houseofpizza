@@ -1,20 +1,16 @@
 package com.houseofpizza.service;
 
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import com.houseofpizza.repository.PizzaToOrderRepository;
 
 @ExtendWith(MockitoExtension.class)
 class OrderProcessServiceTest {
 
-    @Mock
-    private PizzaToOrderRepository pizzaToOrderRepository;
-
-    @InjectMocks
-    private OrderProcessService service;
+//    @Mock
+//    private PizzaToOrderRepository pizzaToOrderRepository;
+//
+//    @InjectMocks
+//    private OrderProcessService service;
 
 //    @Test
 //    void getStatusOrderService() throws InterruptedException {

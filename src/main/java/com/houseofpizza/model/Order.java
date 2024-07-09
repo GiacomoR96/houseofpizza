@@ -1,6 +1,5 @@
 package com.houseofpizza.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +34,8 @@ public class Order extends AuditableVersionedEntity<Long> {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "person_name")
-    private String personName;
-
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "email")
+    private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "lifecycle")
