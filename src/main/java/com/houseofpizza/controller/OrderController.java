@@ -2,6 +2,8 @@ package com.houseofpizza.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
@@ -19,11 +21,12 @@ import com.houseofpizza.assembler.OrderAssembler;
 import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.StatusOrderAssembler;
 import com.houseofpizza.model.Order;
+import com.houseofpizza.representation.OrderProcessingModel;
 import com.houseofpizza.representation.OrderingModel;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.OrderingDto;
-import com.houseofpizza.service.OrderProcessService;
 import com.houseofpizza.service.OrderService;
+import com.houseofpizza.service.PizzaToOrderService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -37,7 +40,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private OrderProcessService orderProcessService;
+    private PizzaToOrderService pizzaToOrderService;
 
     @Autowired
     private OrderAssembler orderAssembler;
@@ -67,17 +70,14 @@ public class OrderController {
         return ok(statusOrderAssembler.toCollectionModel(result.getPizzaToOrders()));
     }
 
-//    TODO : TEMPORARY API DISABLING
-//    @PostMapping(value = "/process")
-//    @ApiResponses(value = {
-//        @ApiResponse(responseCode = "200", description = "OK"),
-//        @ApiResponse(responseCode = "404", description = "NOT FOUND")
-//    })
-//    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess()
-//        throws ErrorException, InterruptedException {
-//        List<Long> output = orderProcessService.getOrderProcessing();
-//        return ok(orderProcessAssembler.toCollectionModel(output));
-//    }
+    @PostMapping(value = "/process")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK"),
+    })
+    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess() throws InterruptedException {
+        List<Long> output = pizzaToOrderService.processOrder();
+        return ok(orderProcessAssembler.toCollectionModel(output));
+    }
 
     @DeleteMapping(value = "/delete/{order}")
     @ApiResponses(value = {

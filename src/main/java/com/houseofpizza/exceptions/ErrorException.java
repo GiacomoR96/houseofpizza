@@ -2,7 +2,6 @@ package com.houseofpizza.exceptions;
 
 import static com.houseofpizza.exceptions.ErrorCodes.generateErrorException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +27,6 @@ public class ErrorException extends ResponseStatusException {
         throws ErrorException {
         return Optional.ofNullable(queryResults)
             .filter(CollectionUtils::isNotEmpty)
-            .orElseThrow(() -> generateException(error));
-    }
-
-    public static <T> T extractFirstOrThrowNotFound(List<T> queryResults, ErrorCodes error) {
-        return Optional.ofNullable(queryResults).flatMap(list -> list.stream().findFirst())
             .orElseThrow(() -> generateException(error));
     }
 

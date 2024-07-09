@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.repository.OrderRepository;
 import com.houseofpizza.representation.dto.OrderingDto;
@@ -23,8 +22,8 @@ class OrderServiceTest {
     @Mock
     private PizzaService pizzaService;
 
-    @Mock
-    private OrderStatusService orderStatusService;
+//    @Mock
+//    private OrderStatusService orderStatusService;
 
     @Mock
     private OrderRepository orderRepository;
@@ -61,16 +60,16 @@ class OrderServiceTest {
         return Collections.singletonList(dto);
     }
 
-    private Order getMockOrderEntity() {
-        Order entity = new Order();
-        entity.setId(100L);
-        entity.setPersonName("");
-        return entity;
-    }
+//    private Order getMockOrderEntity() {
+//        Order entity = new Order();
+//        entity.setId(100L);
+//        entity.setPersonName("");
+//        return entity;
+//    }
 
-    private List<Order> getMockOrderEntityList() {
-        return Collections.singletonList(getMockOrderEntity());
-    }
+//    private List<Order> getMockOrderEntityList() {
+//        return Collections.singletonList(getMockOrderEntity());
+//    }
 
     private Pizza getMockPizzaEntity() {
         Pizza entity = new Pizza();
