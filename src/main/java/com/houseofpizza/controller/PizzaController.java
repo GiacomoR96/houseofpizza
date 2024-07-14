@@ -37,8 +37,8 @@ public class PizzaController {
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
     public ResponseEntity<CollectionModel<ProductsModel>> getProducts() {
-        List<Pizza> output = pizzaService.findAllPizza();
-        return ok(pizzaProductAssembler.toCollectionModel(output));
+        List<Pizza> result = pizzaService.findAll();
+        return ok(pizzaProductAssembler.toCollectionModel(result));
     }
 
 }

@@ -1,14 +1,19 @@
 package com.houseofpizza.representation;
 
-import org.springframework.hateoas.RepresentationModel;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderingModel extends RepresentationModel<OrderingModel> {
+public class OrderingModel extends BaseRepresentationModel<Long, OrderingModel> {
 
-    private Long orderNumber;
+    private Long order;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
 }

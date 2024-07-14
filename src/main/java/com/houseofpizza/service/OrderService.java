@@ -1,20 +1,22 @@
 package com.houseofpizza.service;
 
-import static com.houseofpizza.exceptions.ErrorException.checkNotEmptyListOrThrowNotFound;
-import static com.houseofpizza.factory.OrderingFactory.buildOrder;
+import static com.houseofpizza.factory.OrderFactory.buildBaseOrder;
+import static com.houseofpizza.factory.PizzaToOrderFactory.buildBasePizzaToOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.houseofpizza.enums.LifecycleEnum;
 import com.houseofpizza.exceptions.ErrorCodes;
-import com.houseofpizza.exceptions.ErrorException;
 import com.houseofpizza.model.Order;
 import com.houseofpizza.model.Pizza;
-import com.houseofpizza.model.Status;
+import com.houseofpizza.model.PizzaToOrder;
 import com.houseofpizza.repository.OrderRepository;
 import com.houseofpizza.repository.specification.builder.OrderSpecificationBuilder;
 import com.houseofpizza.representation.dto.OrderingDto;
@@ -25,50 +27,61 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class OrderService {
-
-    @Autowired
-    private OrderRepository repository;
+public class OrderService extends BaseService<OrderRepository, Order, Long> {
 
     @Autowired
     private PizzaService pizzaService;
 
-    @Autowired
-    private PizzaToOrderService pizzaToOrderService;
-
-    @Autowired
-    private OrderStatusService orderStatusService;
-
-    // TODO: Add data control logic on id provided in input before saving to database
-    public Long orderCreation(OrderingDto dto) throws ErrorException {
-        log.info("Begin service method orderCreation");
-        List<ProductDto> productDtoList = dto.getProducts();
-
-        checkNotEmptyListOrThrowNotFound(productDtoList, ErrorCodes.LIST_NOT_FOUND);
-        Order order = retrieveOrSaveOrderByPersonName(dto.getPersonName());
-
-        for (ProductDto productDto : productDtoList) {
-            for (var i = 0; i < productDto.getQuantity(); i++) {
-                Pizza pizza = pizzaService.findPizzaByidPizza(productDto.getId());
-                Status status = orderStatusService.saveBaseStatusOrder();
-                pizzaToOrderService.saveBasePizzaToOrder(order.getId(), pizza.getId(), status.getId());
-            }
-        }
-
-        log.info("Service orderId output : {}", order.getId());
-        log.info("End service method orderCreation");
-        return order.getId();
+    protected OrderService(OrderRepository repository) {
+        super(repository);
     }
 
-    private Order retrieveOrSaveOrderByPersonName(String personName) {
-        Specification<Order> orderSpecification =
-            OrderSpecificationBuilder.withPersonNameEqualTo(personName);
+    @Transactional
+    public Order createAndSaveOrder(OrderingDto dto) {
+        log.info("Begin service method orderCreation");
 
-        return repository.findAll(orderSpecification)
-            .stream().findFirst()
-            .orElseGet(() ->
-                repository.save(buildOrder(personName))
-            );
+        Order order = retrieveOrBuildOrder(dto.getEmail());
+        List<PizzaToOrder> list = new ArrayList<>();
+
+        for (ProductDto product : dto.getProducts()) {
+
+            for (var i = 0; i < product.getQuantity(); i++) {
+                Pizza pizza = pizzaService.findOneOrError404(product.getId());
+                list.add(buildBasePizzaToOrder(order, pizza));
+            }
+        }
+        order.getPizzaToOrders().addAll(list);
+        save(order);
+
+        log.info("Service orderId output : {}", order);
+        log.info("End service method orderCreation");
+        return order;
+    }
+
+    public Order getStatusOrder(Long id) {
+        Order order = findOneOrError404(id);
+        if (order.getLifecycle() == LifecycleEnum.DELETED) {
+            throw ErrorCodes.generateError404(ErrorCodes.NOT_FOUND);
+        }
+        return order;
+    }
+
+    @Transactional
+    public void deleteOrder(Long id) {
+        Order order = findOneOrError404(id);
+        order.setLifecycle(LifecycleEnum.DELETED);
+        save(order);
+    }
+
+    private Order retrieveOrBuildOrder(String email) {
+        if (StringUtils.isBlank(email)) {
+            return buildBaseOrder(email);
+        }
+        Specification<Order> orderSpecification =
+            OrderSpecificationBuilder.withPersonNameEqualToAndOrderActive(email);
+
+        return repository.findOne(orderSpecification)
+            .orElseGet(() -> buildBaseOrder(email));
     }
 
 }

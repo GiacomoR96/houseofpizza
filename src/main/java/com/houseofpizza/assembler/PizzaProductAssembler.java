@@ -5,6 +5,7 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import com.houseofpizza.controller.PizzaController;
+import com.houseofpizza.mapper.PizzaMapper;
 import com.houseofpizza.model.Pizza;
 import com.houseofpizza.representation.ProductsModel;
 
@@ -23,16 +24,7 @@ public class PizzaProductAssembler extends RepresentationModelAssemblerSupport<P
     @Override
     @NonNull
     public ProductsModel toModel(@NonNull Pizza entity) {
-// TODO : Resolve this problem on mapper
-// return PizzaMapper.INSTANCE.entityToModel(entity);
-        ProductsModel productsModel = new ProductsModel();
-
-        productsModel.setId(entity.getId());
-        productsModel.setName(entity.getName());
-        productsModel.setPrice(entity.getPrice());
-        productsModel.setImage(entity.getImage());
-
-        return productsModel;
+        return PizzaMapper.INSTANCE.entityToModel(entity);
     }
 
 }

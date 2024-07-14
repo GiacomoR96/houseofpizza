@@ -10,8 +10,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PizzaToOrderSpecificationBuilder {
 
-    public Specification<PizzaToOrder> withIdOrderEqualTo(Long orderNumber) {
-        return Specification.where(PizzaToOrderSpecification.withIdOrderEqualTo(orderNumber));
+    public Specification<PizzaToOrder> withStatusOrderIsQueue() {
+        return Specification.where(PizzaToOrderSpecification.withStatusOrderIsQueue());
     }
 
 }

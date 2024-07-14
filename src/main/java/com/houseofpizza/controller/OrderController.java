@@ -3,7 +3,6 @@ package com.houseofpizza.controller;
 import static org.springframework.http.ResponseEntity.ok;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -20,17 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.houseofpizza.assembler.OrderAssembler;
 import com.houseofpizza.assembler.OrderProcessAssembler;
-import com.houseofpizza.assembler.OrderStatusAssembler;
-import com.houseofpizza.enums.StatusEnum;
-import com.houseofpizza.exceptions.ErrorException;
-import com.houseofpizza.model.Pizza;
+import com.houseofpizza.assembler.StatusOrderAssembler;
+import com.houseofpizza.model.Order;
 import com.houseofpizza.representation.OrderProcessingModel;
 import com.houseofpizza.representation.OrderingModel;
 import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.OrderingDto;
-import com.houseofpizza.service.OrderProcessService;
 import com.houseofpizza.service.OrderService;
-import com.houseofpizza.service.OrderStatusService;
+import com.houseofpizza.service.PizzaToOrderService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -44,14 +40,12 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private OrderStatusService orderStatusService;
-    @Autowired
-    private OrderProcessService orderProcessService;
+    private PizzaToOrderService pizzaToOrderService;
 
     @Autowired
     private OrderAssembler orderAssembler;
     @Autowired
-    private OrderStatusAssembler orderStatusAssembler;
+    private StatusOrderAssembler statusOrderAssembler;
     @Autowired
     private OrderProcessAssembler orderProcessAssembler;
 
@@ -61,7 +55,7 @@ public class OrderController {
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
     public ResponseEntity<OrderingModel> orderCreation(@RequestBody @Valid final OrderingDto dto) {
-        Long output = orderService.orderCreation(dto);
+        Order output = orderService.createAndSaveOrder(dto);
         return ok(orderAssembler.toModel(output));
     }
 
@@ -70,20 +64,18 @@ public class OrderController {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
-    public ResponseEntity<StatusOrderModel> getOrderStatus(
-        @PathVariable(name = "order") final Long order) throws ErrorException {
-        Map<Pizza, StatusEnum> output = orderStatusService.getStatusOrderService(order);
-        return ok(orderStatusAssembler.toModel(output));
+    public ResponseEntity<CollectionModel<StatusOrderModel>> getStatusOrder(
+        @PathVariable(name = "order") final Long order) {
+        Order result = orderService.getStatusOrder(order);
+        return ok(statusOrderAssembler.toCollectionModel(result.getPizzaToOrders()));
     }
 
     @PostMapping(value = "/process")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
-    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess()
-        throws ErrorException, InterruptedException {
-        List<Long> output = orderProcessService.getOrderProcessing();
+    public ResponseEntity<CollectionModel<OrderProcessingModel>> orderProcess() throws InterruptedException {
+        List<Long> output = pizzaToOrderService.processOrder();
         return ok(orderProcessAssembler.toCollectionModel(output));
     }
 
@@ -92,11 +84,9 @@ public class OrderController {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
     })
-    public ResponseEntity<StatusOrderModel> deleteOrder(@PathVariable(name = "order") final Long order)
-        throws ErrorException {
-
-        // TODO : [WIP] Adding delete logic after updating db structure
-        return null;
+    public ResponseEntity<StatusOrderModel> deleteOrder(@PathVariable(name = "order") final Long order) {
+        orderService.deleteOrder(order);
+        return ResponseEntity.noContent().build();
     }
 
 }

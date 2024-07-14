@@ -1,6 +1,6 @@
 package com.houseofpizza.model;
 
-import java.io.Serializable;
+import com.houseofpizza.enums.StatusEnum;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +9,13 @@ import lombok.experimental.FieldNameConstants;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,20 +23,24 @@ import jakarta.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@IdClass(PizzaToOrder.class)
 @FieldNameConstants
-public class PizzaToOrder implements Serializable {
+public class PizzaToOrder extends AuditableVersionedEntity<Long> {
 
     @Id
-    @Column(name = "id_order")
-    private Long idOrder;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-    @Id
-    @Column(name = "id_pizza")
-    private Long idPizza;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    @Id
-    @Column(name = "id_status")
-    private Long idStatus;
+    @ManyToOne
+    @JoinColumn(name = "pizza_id")
+    private Pizza pizza;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusEnum status;
 
 }
