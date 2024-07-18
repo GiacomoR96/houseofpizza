@@ -26,10 +26,6 @@ public class PizzaToOrderService extends BaseService<PizzaToOrderRepository, Piz
         super(repository);
     }
 
-//    public List<PizzaToOrder> retrievePizzaToOrderInQueueAndOrderActive() {
-//        return repository.findByStatusEqualsAndOrderLifecycleEquals(StatusEnum.QUEUE.name(), LifecycleEnum.ACTIVE.name());
-//    }
-
     public List<Long> processOrder() throws InterruptedException {
         log.info("Begin service method getOrderProcessing");
         List<Long> elaborateOrderIds = new ArrayList<>();

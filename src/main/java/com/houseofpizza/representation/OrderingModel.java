@@ -17,3 +17,4 @@ public class OrderingModel extends BaseRepresentationModel<Long, OrderingModel> 
     private LocalDate date;
 
 }
+

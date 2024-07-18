@@ -16,3 +16,4 @@ public class PizzaService extends BaseService<PizzaRepository, Pizza, Long> {
     }
 
 }
+

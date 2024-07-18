@@ -44,3 +44,4 @@ public class PizzaToOrder extends AuditableVersionedEntity<Long> {
     private StatusEnum status;
 
 }
+

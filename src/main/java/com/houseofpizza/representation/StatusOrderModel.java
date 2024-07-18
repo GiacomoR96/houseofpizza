@@ -11,3 +11,4 @@ public class StatusOrderModel extends BaseRepresentationModel<Long, OrderingMode
     private String status;
 
 }
+

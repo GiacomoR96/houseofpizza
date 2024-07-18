@@ -21,3 +21,4 @@ public interface OrderMapper {
     OrderingModel entityToModel(Order entity);
 
 }
+

@@ -38,3 +38,4 @@ public abstract class AuditableVersionedEntity<ID> extends BaseEntity<ID> {
     private Long version;
 
 }
+

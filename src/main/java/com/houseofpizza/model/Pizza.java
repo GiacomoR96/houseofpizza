@@ -43,4 +43,3 @@ public class Pizza extends AuditableVersionedEntity<Long> {
     private List<PizzaToOrder> pizzaToOrders = new ArrayList<>();
 
 }
-

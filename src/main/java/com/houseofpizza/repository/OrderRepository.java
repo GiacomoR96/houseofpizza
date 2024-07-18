@@ -8,5 +8,5 @@ import com.houseofpizza.model.Order;
 @Component
 @Transactional(readOnly = true)
 public interface OrderRepository extends BaseRepository<Order, Long> {
-
 }
+
