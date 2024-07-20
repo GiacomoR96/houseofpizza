@@ -12,3 +12,4 @@ public class OrderProcessingModel extends RepresentationModel<OrderProcessingMod
     private Long orderNumber;
 
 }
+

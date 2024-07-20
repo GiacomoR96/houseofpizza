@@ -35,3 +35,4 @@ public class ErrorException extends ResponseStatusException {
     }
 
 }
+

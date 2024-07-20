@@ -22,3 +22,4 @@ public interface PizzaToOrderMapper {
     @Mapping(ignore = true, target = "product")
     StatusOrderModel entityToModel(PizzaToOrder entity);
 }
+

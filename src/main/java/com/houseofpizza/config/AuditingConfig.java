@@ -27,3 +27,4 @@ public class AuditingConfig {
         }).or(() -> Optional.ofNullable(appName));
     }
 }
+

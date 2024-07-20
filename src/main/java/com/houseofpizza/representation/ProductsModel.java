@@ -12,3 +12,4 @@ public class ProductsModel extends BaseRepresentationModel<Long, ProductsModel> 
     private String image;
 
 }
+

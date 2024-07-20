@@ -31,3 +31,4 @@ public class BaseRepresentationModel<ID, D extends RepresentationModel<? extends
     private CollectionModel<EmbeddedWrapper> embeddeds;
 
 }
+

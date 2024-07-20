@@ -11,3 +11,4 @@ public enum LifecycleEnum {
 
     private final String code;
 }
+

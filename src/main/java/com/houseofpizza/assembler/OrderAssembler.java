@@ -28,3 +28,4 @@ public class OrderAssembler extends RepresentationModelAssemblerSupport<Order, O
     }
 
 }
+
