@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>houseofpizza</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <groupId>com.houseofpizza</groupId>
     <name>houseofpizza</name>
     <description>House of Pizza project</description>
