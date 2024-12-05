@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1719741457273-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: lifecycle
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: version
+                  type: BIGINT
+            tableName: order
+  - changeSet:
+      id: 1719741457273-2
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: created_at
+            tableName: order
+  - changeSet:
+      id: 1719741457273-3
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: updated_at
+            tableName: order
+  - changeSet:
+      id: 1719741457273-4
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: version
+            tableName: order

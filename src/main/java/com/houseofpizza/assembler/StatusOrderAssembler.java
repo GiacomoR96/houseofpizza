@@ -1,39 +1,34 @@
 package com.houseofpizza.assembler;
 
-import com.houseofpizza.bin.StatusOrderBin;
-import com.houseofpizza.entity.PizzaEntity;
-import com.houseofpizza.resource.StatusOrderModel;
-import com.houseofpizza.resource.dto.PizzaOrderingDto;
-import org.apache.commons.collections4.MapUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.houseofpizza.controller.OrderController;
+import com.houseofpizza.mapper.PizzaMapper;
+import com.houseofpizza.mapper.PizzaToOrderMapper;
+import com.houseofpizza.model.PizzaToOrder;
+import com.houseofpizza.representation.StatusOrderModel;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Scope("prototype")
 @Component
-public class StatusOrderAssembler {
+public class StatusOrderAssembler extends RepresentationModelAssemblerSupport<PizzaToOrder, StatusOrderModel> {
 
-    public StatusOrderModel populateStatusOrderModel(StatusOrderBin bin) {
-        return new StatusOrderModel(bin.getOrderNumber(), mapPizzaOrderingApiList(bin.getPizzaMap()));
+    public StatusOrderAssembler() {
+        super(OrderController.class, StatusOrderModel.class);
     }
 
-    private List<PizzaOrderingDto> mapPizzaOrderingApiList(Map<PizzaEntity, String> entityList) {
-        List<PizzaOrderingDto> list = new ArrayList<>();
-        if (MapUtils.isNotEmpty(entityList)) {
-            entityList.forEach((k, v) -> {
-                list.add(populatePizzaOrderingApi(k, v));
-            });
-        }
-        return list;
-    }
-
-    private PizzaOrderingDto populatePizzaOrderingApi(PizzaEntity element, String status) {
-        PizzaOrderingDto api = new PizzaOrderingDto();
-        api.setStatus(status);
-        api.setPizzaName(element.getName());
-        api.setPrice(element.getPrice());
-        return api;
+    @Override
+    @NonNull
+    public StatusOrderModel toModel(@NonNull PizzaToOrder entity) {
+        StatusOrderModel result = PizzaToOrderMapper.INSTANCE.entityToModel(entity);
+        result.setProduct(PizzaMapper.INSTANCE.entityToModel(entity.getPizza()));
+        return result;
     }
 
 }
+

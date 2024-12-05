@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.18.xsd">
+
+    <!-- Initialize the database with tables -->
+    <include file="/db/changelog/DDL/1710028327105-changelog.yaml"/>
+    <include file="/db/changelog/DDL/1710069229856-changelog.yaml"/>
+
+    <!-- Adding column image on table pizza-->
+    <include file="db/changelog/DDL/1713484260640-changelog.yaml"/>
+
+    <!-- Removing email from order table -->
+    <include file="db/changelog/DDL/1716114222957-changelog.yaml"/>
+
+    <!-- Adding audit fields on pizza table and delete status table -->
+    <include file="db/changelog/DDL/1719739749298-changelog.yaml"/>
+
+    <!-- Populate pizza table with audit fields -->
+    <include file="/db/changelog/DML/populate_pizza_table.yaml"/>
+
+    <!-- Adding audit fields on pizza_to_order table -->
+    <include file="db/changelog/DDL/1719740976288-changelog.yaml"/>
+
+    <!-- Adding audit fields on order table -->
+    <include file="db/changelog/DDL/1719741457273-changelog.yaml"/>
+
+    <!-- Renaming email field and remove date field -->
+    <include file="db/changelog/DDL/1720464469300-changelog.yaml"/>
+
+</databaseChangeLog>

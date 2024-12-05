@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1713484260640-1
+      author: giacomo.romano
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: image
+                  type: VARCHAR(55)
+            tableName: pizza

@@ -1,0 +1,245 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: giacomo.romano
+      changes:
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: 'Margherita'
+              - column:
+                  name: price
+                  value: 5.5
+              - column:
+                  name: image
+                  value: margherita.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: 'Capricciosa'
+              - column:
+                  name: price
+                  value: 7.0
+              - column:
+                  name: image
+                  value: capricciosa.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: 'Salsiccia&Friarielli'
+              - column:
+                  name: price
+                  value: 8
+              - column:
+                  name: image
+                  value: salsiccia_friarielli.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: 'Biancaneve'
+              - column:
+                  name: price
+                  value: 5
+              - column:
+                  name: image
+                  value: biancaneve.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: 'Diavola'
+              - column:
+                  name: price
+                  value: 7
+              - column:
+                  name: image
+                  value: diavola.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: 'Quattro stagioni'
+              - column:
+                  name: price
+                  value: 9
+              - column:
+                  name: image
+                  value: quattro_stagioni.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: name
+                  value: 'Marinara'
+              - column:
+                  name: price
+                  value: 6
+              - column:
+                  name: image
+                  value: marinara.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: name
+                  value: 'Parmigiana'
+              - column:
+                  name: price
+                  value: 9.5
+              - column:
+                  name: image
+                  value: parmigiana.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: name
+                  value: 'Vegetariana'
+              - column:
+                  name: price
+                  value: 11
+              - column:
+                  name: image
+                  value: vegetariana.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
+        - insert:
+            tableName: pizza
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: name
+                  value: 'Porcina'
+              - column:
+                  name: price
+                  value: 8
+              - column:
+                  name: image
+                  value: porcina.jpg
+              - column:
+                  name: created_at
+                  value: '2024-01-01 00:00:00.000'
+              - column:
+                  name: updated_at
+                  value: '2024-06-30 00:00:00.000'
+              - column:
+                  name: version
+                  value: 1
