@@ -1,0 +1,18 @@
+services:
+
+  app:
+    build:
+      args:
+        - SOURCE_JAR=./target
+    volumes:
+      - ./config-map/${ENV}/application.properties:/data/application.properties
+    environment:
+      - JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=mysecretpassword
+      - DB_NAME=houseofpizza
+    ports:
+      - 4001:4001
+      - 5005:5005
