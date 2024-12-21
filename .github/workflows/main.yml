@@ -21,9 +21,6 @@ jobs:
     - name: Run the Maven verify phase
       run: mvn clean compile package
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag houseofpizza:$(date +%s)
-
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-22.04
@@ -46,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-$(date +%s)
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         id: push
