@@ -1,8 +1,9 @@
+FROM registry.access.redhat.com/ubi8/openjdk-17-runtime:1.19-1 AS builder
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+RUN mvn clean compile package -DskipTests
 
-FROM registry.access.redhat.com/ubi8/openjdk-17-runtime:1.19-1
-
-ARG SOURCE_JAR=./houseofpizza/houseofpizza/target
-ENV JAR_PATH $SOURCE_JAR
-
-COPY ${JAR_PATH}/*.jar /tmp/app.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /tmp/app.jar"]
+FROM eclipse-temurin:17-jre-jammy
+COPY --from=builder /app/target/*.jar app.jar
+ENTRYPOINT ["java", "-Xmx128m", "-jar", "/app.jar"]
