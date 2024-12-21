@@ -2,7 +2,7 @@ name: BE houseofpizza project Docker image
 
 on:
   push:
-    branches: [ "Add_github_action_configuration" ]
+    branches: [ "master" ]
 
 jobs:
   build:
