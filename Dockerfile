@@ -1,5 +1,8 @@
 FROM maven:3.8.5-openjdk-17 AS builder
 RUN ls -la
+COPY . /app
+WORKDIR /app
+RUN ls -la
 RUN mvn clean compile package -DskipTests
 
 FROM eclipse-temurin:17-jre-jammy
