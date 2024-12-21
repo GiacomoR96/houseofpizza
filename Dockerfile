@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/openjdk-17-runtime:1.19-1 AS builder
+FROM maven:3.8.5-openjdk-17 AS builder
 RUN mvn clean compile package -DskipTests
 
 FROM eclipse-temurin:17-jre-jammy
