@@ -2,7 +2,7 @@ name: BE houseofpizza project Docker image
 
 on:
   push:
-    branches: [ "obscuring_sensitive_data" ]
+    branches: [ "main" ]
 
 jobs:
   build:

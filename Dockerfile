@@ -3,6 +3,8 @@ COPY . /app
 WORKDIR /app
 COPY /config-map/prod/application.properties /app/src/main/resources/application.properties
 RUN mvn clean compile package -DskipTests
+
+# Whether want to display the contents of the reference path when build the Docker image
 #RUN FILES=$(ls -1 /app/src/main/resources) && echo "FILES=$FILES" >> env.txt
 
 FROM eclipse-temurin:17-jre-jammy
