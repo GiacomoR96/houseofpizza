@@ -1,28 +1,28 @@
 package com.houseofpizza.controller;
 
-import static org.springframework.http.ResponseEntity.ok;
-
-import java.util.List;
-
+import com.houseofpizza.assembler.PizzaProductAssembler;
+import com.houseofpizza.model.Pizza;
+import com.houseofpizza.representation.ProductsModel;
+import com.houseofpizza.service.PizzaService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.houseofpizza.assembler.PizzaProductAssembler;
-import com.houseofpizza.model.Pizza;
-import com.houseofpizza.representation.ProductsModel;
-import com.houseofpizza.service.PizzaService;
+import java.util.List;
 
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping(path = "/pizza", produces = {MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE})
+@CrossOrigin
 public class PizzaController {
 
     @Autowired
