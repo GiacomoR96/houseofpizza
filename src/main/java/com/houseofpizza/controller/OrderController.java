@@ -1,22 +1,5 @@
 package com.houseofpizza.controller;
 
-import static org.springframework.http.ResponseEntity.ok;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.houseofpizza.assembler.OrderAssembler;
 import com.houseofpizza.assembler.OrderProcessAssembler;
 import com.houseofpizza.assembler.StatusOrderAssembler;
@@ -27,14 +10,23 @@ import com.houseofpizza.representation.StatusOrderModel;
 import com.houseofpizza.representation.dto.OrderingDto;
 import com.houseofpizza.service.OrderService;
 import com.houseofpizza.service.PizzaToOrderService;
-
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping(path = "/pizza/order", produces = {MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE})
+@CrossOrigin
 public class OrderController {
 
     @Autowired
