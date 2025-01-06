@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>houseofpizza</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <groupId>com.houseofpizza</groupId>
     <name>houseofpizza</name>
     <description>House of Pizza project</description>
@@ -96,12 +96,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>junit</groupId>-->
-            <!--                    <artifactId>junit</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -194,29 +188,11 @@
                     </excludes>
                 </configuration>
                 <executions>
-                    <!--                    <execution>-->
-                    <!--                        <id>pre-integration-test</id>-->
-                    <!--                        <goals>-->
-                    <!--                            <goal>start</goal>-->
-                    <!--                        </goals>-->
-                    <!--                    </execution>-->
-                    <!--                    <execution>-->
-                    <!--                        <id>post-integration-test</id>-->
-                    <!--                        <goals>-->
-                    <!--                            <goal>stop</goal>-->
-                    <!--                        </goals>-->
-                    <!--                    </execution>-->
                     <execution>
                         <goals>
                             <goal>repackage</goal>
                             <goal>build-info</goal>
                         </goals>
-                        <!--                        <configuration>-->
-                        <!--                            <additionalProperties>-->
-                        <!--                                <commitSha>${commitSha}</commitSha>-->
-                        <!--                                <buildId>${buildId}</buildId>-->
-                        <!--                            </additionalProperties>-->
-                        <!--                        </configuration>-->
                     </execution>
                 </executions>
             </plugin>
@@ -335,26 +311,9 @@
                     <apiDocsUrl>http://localhost:4001/houseofpizza/v3/api-docs</apiDocsUrl>
                     <outputFileName>houseofpizza-openapi.json</outputFileName>
                     <outputDir>${project.basedir}/src/main/resources/static</outputDir>
-                    <skip>false</skip>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>3.6.3</version>-->
-            <!--                <configuration>-->
-            <!--                    <show>private</show>-->
-            <!--                    <jarOutputDirectory>${project.build.directory}/custom-javadoc-jar</jarOutputDirectory>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-javadocs</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
