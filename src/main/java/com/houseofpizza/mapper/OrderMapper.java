@@ -16,7 +16,7 @@ public interface OrderMapper {
     Order toEntity(String email);
 
     @Mapping(ignore = true, target = "id")
-    @Mapping(source = "id", target = "order")
+    @Mapping(source = "id", target = "orderId")
     @Mapping(source = "createdAt", target = "date")
     OrderingModel entityToModel(Order entity);
 
