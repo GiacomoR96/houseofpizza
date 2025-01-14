@@ -25,7 +25,7 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(path = "/pizza/order", produces = {MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE})
+@RequestMapping(path = "/order", produces = {MediaType.APPLICATION_JSON_VALUE, MediaTypes.HAL_JSON_VALUE})
 @CrossOrigin
 public class OrderController {
 
@@ -51,7 +51,7 @@ public class OrderController {
         return ok(orderAssembler.toModel(output));
     }
 
-    @GetMapping(value = "/status/{order}")
+    @GetMapping(value = "/{order}/status")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
@@ -71,7 +71,7 @@ public class OrderController {
         return ok(orderProcessAssembler.toCollectionModel(output));
     }
 
-    @DeleteMapping(value = "/delete/{order}")
+    @DeleteMapping(value = "/{order}")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "404", description = "NOT FOUND")
