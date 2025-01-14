@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class OrderingModel extends BaseRepresentationModel<Long, OrderingModel> {
 
-    private Long order;
+    private Long orderId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
