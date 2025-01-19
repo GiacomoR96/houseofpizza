@@ -68,7 +68,7 @@ public class OrderService extends BaseService<OrderRepository, Order, Long> {
 
     @Transactional
     public void deleteOrder(Long id) {
-        Order order = findOneOrError404(id);
+        Order order = getStatusOrder(id);
         order.setLifecycle(LifecycleEnum.DELETED);
         save(order);
     }
