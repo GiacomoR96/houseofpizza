@@ -10,7 +10,6 @@ The application would allow for keeping track of the orders placed by the variou
 - [Houseofpizza](#houseofpizza)
   - [Summary](#summary)
   - [Description](#description)
-  - [Key features](#key-features)
   - [Technologies Used](#technologies-used)
   - [Docker](#docker)
     - [GitHub Actions](#github-actions)
@@ -32,18 +31,6 @@ The application is designed to meet the management needs of a pizzeria, where it
 - Withdrawal and removal of orders present in the system.
 
 The API is designed to facilitate interaction with the system, both for customers and back-office staff.
-
-
-## Key features
-
-The application exposes a set of REST APIs for integration with the related client.
-Following are some of the main endpoints:
-
-- **GET /products**: This API returns a list of all the pizzas available on the menu, each with detailed information that allows customers to choose what to order.
-- **POST /order/creation**: This API allows users to order one or more pizzas. Each order is managed and stored within the database in order to process orders at a later stage.
-- **GET /order/creation**: This API allows users to check their orders and view their current processing status.
-- **POST /order/process**: This API is intended for back-office management of the pizzeria and allows users to manage the order preparation and completion process.
-- **DELETE /order/{order}**: This API is used to remove orders from the system after they have been completed and picked up by the customer.
 
 
 ## Technologies Used
