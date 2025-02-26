@@ -308,7 +308,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <apiDocsUrl>http://localhost:4001/houseofpizza/v3/api-docs</apiDocsUrl>
+                    <apiDocsUrl>http://localhost:30008/houseofpizza/v3/api-docs</apiDocsUrl>
                     <outputFileName>houseofpizza-openapi.json</outputFileName>
                     <outputDir>${project.basedir}/src/main/resources/static</outputDir>
                     <skip>true</skip>

@@ -21,4 +21,4 @@ docker build \
 
 docker compose up --build
 
-# See http://localhost:4001/houseofpizza/swagger-ui/index.html
+# See http://localhost:30008/houseofpizza/swagger-ui/index.html
